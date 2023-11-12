@@ -14,12 +14,17 @@ void PrintMessage(std::string msg)
 
 int main(int argc, char** argv)
 {
-	std::vector<int> MPrimes;
 	int MaxPrimeLimit = atoi(argv[1]);
+	std::stringstream msg;
+	std::vector<int> MPrimes;
+	
 	MersennePrimes mp;
 	mp.GenerateListOfMersennes(MaxPrimeLimit);
 	MPrimes = mp.GetListOfMPrimes();
-	PrintMessage("Mersenne primes");
+	msg << MPrimes.size() << " Mersenne primes generated up to the maximum ";
+	msg << MaxPrimeLimit << ".";
+	PrintMessage(msg.str());
+
 	std::copy(MPrimes.begin(), MPrimes.end(), std::ostream_iterator<int>(std::cout, " "));
 	std::cout << "\n";
 	std::string s;
