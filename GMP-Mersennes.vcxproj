@@ -127,7 +127,7 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="GMP-Mersennes.cpp" />
     <ClCompile Include="MersennePrimes.cpp" />
+    <ClCompile Include="Pow2Result.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MersennePrimes.h" />
+    <ClInclude Include="Pow2Result.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
