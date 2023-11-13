@@ -15,6 +15,6 @@ Pow2Result::Pow2Result(mpz_t Prime, mpz_t Result):Pow2Result()
 std::string Pow2Result::Summary()
 {
 	std::stringstream msg;
-	msg << "2 raised to the power of " << this->Prime << " -1 is " << this->Result << ".";
+	msg << "(2 ^ " << this->Prime << ") -1 is " << this->Result << ".";
 	return msg.str();
 }

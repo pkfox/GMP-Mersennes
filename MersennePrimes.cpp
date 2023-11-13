@@ -1,45 +1,43 @@
 #include "MersennePrimes.h"
 
 
-MersennePrimes::MersennePrimes()
+MersennePrimes::MersennePrimes(int Maximum, bool GiveFeedback):Maximum(Maximum),GiveFeedback(GiveFeedback)
 {
-	this->Maximum = 0;
-	mpz_init_set_ui(this->One, 1);
-	mpz_init_set_ui(this->Two, 2);
-	mpz_init_set_ui(this->Result,0);
+	mpz_init_set_ui(this->One,1);
+	mpz_init_set_ui(this->Pow2,0);
+	mpz_init_set_ui(this->Pow2MinusOne, 0);
 	mpz_init_set_ui(this->LoopValue, 0);
 }
 
 
-void MersennePrimes::GenerateListOfMersennes(int Maximum)
+void MersennePrimes::GenerateListOfMersennes()
 {
-	this->Maximum = Maximum;
-
 	for (int i = 2; i <= this->Maximum; i++)
 	{
 		if(i % 500 == 0 && this->GiveFeedback)
 			std::cout << i << "\n";
 
-		// This places the value of i in this->LoopValue
+		// The following statement places the value of i in this->LoopValue.
 		mpz_init_set_ui(this->LoopValue, i);
 		bool Prime = mpz_probab_prime_p(this->LoopValue, this->Probability) == 2;
 
 		if (Prime)
 		{
-			// Raise 2 ^ i and put the result in this->Result
-			mpz_pow_ui(this->Result,this->Two, i);
-			// Subtract 1 from the result
-			mpz_sub(this->Result, this->Result, this->One);
+			// Raise 2 ^ i and put the result in this->Pow2
+			mpz_ui_pow_ui(this->Pow2,this->Two, i);
+			// Subtract 1 from the result and put it in this->Pow2MinusOne.
+			mpz_sub(this->Pow2MinusOne,this->Pow2,this->One);
+
+			Prime = mpz_probab_prime_p(this->Pow2, this->Probability) == 2;
 			// and test for primality.
 			// The possible return values from mpz_probab_prime_p are
 			// 0 = Definitely not a prime
 			// 1 = Possibly a prime
 			// 2 = Definitely a prime
-			Prime = mpz_probab_prime_p(this->Result, this->Probability) == 2;
 
 			if (Prime)
 			{
-				Pow2Result pr(this->LoopValue,this->Result);
+				Pow2Result pr(this->LoopValue,this->Pow2MinusOne);
 				this->Results.push_back(pr);
 				this->MPrimes.push_back(i);
 			}

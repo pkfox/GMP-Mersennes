@@ -17,18 +17,16 @@ int main(int argc, char** argv)
 	int MaxPrimeLimit = atoi(argv[1]);
 	std::vector<Pow2Result> Results;
 	std::vector<int> MPrimes;
-	MersennePrimes mp;
-	mp.GiveFeedback = argc > 2;
-
-	mp.GenerateListOfMersennes(MaxPrimeLimit);
+	MersennePrimes mp(MaxPrimeLimit, argc > 2);
+	mp.GenerateListOfMersennes();
 	Results = mp.GetResults();
 	MPrimes = mp.GetMPrimes();
 
 	for(auto r:Results)
 		PrintMessage(r.Summary());
 
-	std::copy(MPrimes.begin(), MPrimes.end(), std::ostream_iterator<int>(std::cout, " "));
-	std::cout << "\n";
+//	std::copy(MPrimes.begin(), MPrimes.end(), std::ostream_iterator<int>(std::cout, " "));
+	std::cout << "Press any key\n";
 	std::string s;
 	std::getline(std::cin, s);
 	return 0;

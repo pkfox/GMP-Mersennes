@@ -15,8 +15,8 @@ Date: 12-11-2023
 class MersennePrimes
 {
 public:
-	MersennePrimes();
-	void GenerateListOfMersennes(int Maximum);
+	MersennePrimes(int Maximum, bool GiveFeedback);
+	void GenerateListOfMersennes();
 	std::vector<int> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
 	std::vector<int> MPrimes;
@@ -24,11 +24,12 @@ public:
 	bool GiveFeedback;
 private:
 	mpz_t One; // Used for subtraction from pow 2.
-	mpz_t Two; // Used for exponential calculation.
+	const unsigned int Two = 2; // Used for exponential calculation.
 	mpz_t LoopValue;  // What it says it is.
-	mpz_t Result; // Generic return value container. 
-	const int Probability = 30; // Used by GMP in primality check.
-	int Maximum;
+	mpz_t Pow2; // Initial pow2 value. 
+	mpz_t Pow2MinusOne;
+	const int Probability = 50; // Used by GMP in primality check.
+	int Maximum; // Generate mersennes up to and including this number.
 	std::vector<Pow2Result> Results;
 };
 
