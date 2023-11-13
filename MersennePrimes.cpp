@@ -1,20 +1,22 @@
 #include "MersennePrimes.h"
 
-
+// ctor accepting a maximum value and a boolean indicating feedback preference.
 MersennePrimes::MersennePrimes(int Maximum, bool GiveFeedback):Maximum(Maximum),GiveFeedback(GiveFeedback)
 {
 	mpz_init_set_ui(this->One,1);
-	mpz_init_set_ui(this->Pow2,0);
-	mpz_init_set_ui(this->Pow2MinusOne, 0);
+	mpz_init_set_ui(this->Pow2Value,0);
+	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 	mpz_init_set_ui(this->LoopValue, 0);
+	mpz_init_set_ui(this->NextPossiblePrime, 0);
 }
 
-
+// Generates a vector of ints containing mersennes.
 void MersennePrimes::GenerateListOfMersennes()
 {
-	for (int i = 2; i <= this->Maximum; i++)
+	int i = 3;
+	for (;i <= this->Maximum;)
 	{
-		if(i % 500 == 0 && this->GiveFeedback)
+		if(i % 500 > 1 && this->GiveFeedback)
 			std::cout << i << "\n";
 
 		// The following statement places the value of i in this->LoopValue.
@@ -23,12 +25,18 @@ void MersennePrimes::GenerateListOfMersennes()
 
 		if (Prime)
 		{
-			// Raise 2 ^ i and put the result in this->Pow2
-			mpz_ui_pow_ui(this->Pow2,this->Two, i);
-			// Subtract 1 from the result and put it in this->Pow2MinusOne.
-			mpz_sub(this->Pow2MinusOne,this->Pow2,this->One);
+			// Raise 2 ^ i and put the result in this->Pow2Value
+			mpz_ui_pow_ui(this->Pow2Value,this->Two, i);
+			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
+			mpz_sub(this->Pow2MinusOneValue,this->Pow2Value,this->One);
+		  
+			// Get next prime.
+			mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
+		
+			// Trying to save some iterations by jumping to the next prime.
+			i = mpz_get_ui(this->NextPossiblePrime);
 
-			Prime = mpz_probab_prime_p(this->Pow2MinusOne, this->Probability) == 2;
+			Prime = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) == 2;
 			// and test for primality.
 			// The possible return values from mpz_probab_prime_p are
 			// 0 = Definitely not a prime
@@ -37,24 +45,29 @@ void MersennePrimes::GenerateListOfMersennes()
 
 			if (Prime)
 			{
-				Pow2Result pr(this->LoopValue,this->Pow2MinusOne);
+				Pow2Result pr(this->LoopValue,this->Pow2MinusOneValue);
 				this->Results.push_back(pr);
 				this->MPrimes.push_back(i);
 			}
 		}
+		else
+			i++;
 	}
 }
 
+// Returns a vector of ints containing the mersennes.
 std::vector<int> MersennePrimes::GetMPrimes()
 {
 	return this->MPrimes;
 }
 
+// Returns a vector of Pow2Result classes containing a brief computation of the mersennes.
 std::vector<Pow2Result> MersennePrimes::GetResults()
 {
 	return this->Results;
 }
 
+// Returns the count of mersennes generated.
 std::string MersennePrimes::Summary()
 {
 	std::stringstream msg;

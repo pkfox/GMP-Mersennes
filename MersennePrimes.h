@@ -26,8 +26,9 @@ private:
 	mpz_t One; // Used for subtraction from pow 2.
 	const unsigned int Two = 2; // Used for exponential calculation.
 	mpz_t LoopValue;  // What it says it is.
-	mpz_t Pow2; // Initial pow2 value. 
-	mpz_t Pow2MinusOne;
+	mpz_t Pow2Value; // Initial pow2 value. 
+	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
+	mpz_t NextPossiblePrime;
 	const int Probability = 50; // Used by GMP in primality check.
 	int Maximum; // Generate mersennes up to and including this number.
 	std::vector<Pow2Result> Results;

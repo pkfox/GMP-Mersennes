@@ -8,6 +8,7 @@ public:
 	Pow2Result(mpz_t Prime ,mpz_t Result);
 	mpz_t Result;
 	mpz_t Prime;
+	// This returns a brief description of the computation.
 	std::string Summary();
 };
 
