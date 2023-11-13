@@ -28,7 +28,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			// Subtract 1 from the result and put it in this->Pow2MinusOne.
 			mpz_sub(this->Pow2MinusOne,this->Pow2,this->One);
 
-			Prime = mpz_probab_prime_p(this->Pow2, this->Probability) == 2;
+			Prime = mpz_probab_prime_p(this->Pow2MinusOne, this->Probability) == 2;
 			// and test for primality.
 			// The possible return values from mpz_probab_prime_p are
 			// 0 = Definitely not a prime
