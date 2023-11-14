@@ -1,8 +1,13 @@
 #include "MersennePrimes.h"
 
-// ctor accepting a maximum value and a boolean indicating feedback preference.
-MersennePrimes::MersennePrimes(int Maximum, bool GiveFeedback):Maximum(Maximum),GiveFeedback(GiveFeedback)
+// ctor accepting a start and end range
+// and a boolean indicating feedback preference.
+MersennePrimes::MersennePrimes(int StartRange,int EndRange, bool GiveFeedback)
 {
+	this->StartRange = StartRange;
+	this->EndRange = EndRange;
+	this->GiveFeedback = GiveFeedback;
+
 	mpz_init_set_ui(this->One,1);
 	mpz_init_set_ui(this->Pow2Value,0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
@@ -13,16 +18,28 @@ MersennePrimes::MersennePrimes(int Maximum, bool GiveFeedback):Maximum(Maximum),
 // Generates a vector of ints containing mersennes.
 void MersennePrimes::GenerateListOfMersennes()
 {
-	int i = 3;
-	for (;i <= this->Maximum;)
+	int i = this->StartRange;
+	bool Prime;
+	// Get first prime.
+	mpz_init_set_ui(this->LoopValue, i);
+	mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
+
+	// Trying to save some iterations by jumping to the next prime.
+	i = mpz_get_ui(this->NextPossiblePrime);
+
+	while(i <= this->EndRange)
 	{
-		if(i % 500 > 1 && this->GiveFeedback)
+		if(i % 500 == 0 && this->GiveFeedback)
 			std::cout << i << "\n";
 
-		// The following statement places the value of i in this->LoopValue.
+			// The following statement places the value of i in this->LoopValue.
+	
 		mpz_init_set_ui(this->LoopValue, i);
-		bool Prime = mpz_probab_prime_p(this->LoopValue, this->Probability) == 2;
+		// Get next prime.
+		mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
 
+		Prime = mpz_probab_prime_p(this->LoopValue, this->Probability) == 2;
+	
 		if (Prime)
 		{
 			// Raise 2 ^ i and put the result in this->Pow2Value
@@ -34,6 +51,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
 		
 			// Trying to save some iterations by jumping to the next prime.
+			
 			i = mpz_get_ui(this->NextPossiblePrime);
 
 			Prime = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) == 2;
@@ -52,6 +70,8 @@ void MersennePrimes::GenerateListOfMersennes()
 		}
 		else
 			i++;
+
+		
 	}
 }
 
@@ -71,7 +91,8 @@ std::vector<Pow2Result> MersennePrimes::GetResults()
 std::string MersennePrimes::Summary()
 {
 	std::stringstream msg;
-	msg << this->Results.size() << " Mersenne primes generated up to the maximum ";
-	msg << this->Maximum << ".";
+	msg << this->Results.size() << " Mersenne primes generated ";
+	msg << "for the range starting at " << this->StartRange;
+	msg << " and ending " << this->EndRange << ".";
 	return msg.str();
 }

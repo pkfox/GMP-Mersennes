@@ -16,9 +16,10 @@ int main(int argc, char** argv)
 {
 	auto beg = std::chrono::high_resolution_clock::now();
 
-	int MaxPrimeLimit = atoi(argv[1]);
+	int StartRange = atoi(argv[1]);
+	int EndRange = atoi(argv[2]);
 	std::vector<Pow2Result> Results;
-	MersennePrimes mp(MaxPrimeLimit, argc > 2);
+	MersennePrimes mp(StartRange,EndRange, argc > 3);
 	mp.GenerateListOfMersennes();
 	Results = mp.GetResults();
 	

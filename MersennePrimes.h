@@ -7,15 +7,17 @@
 #include "Pow2Result.h"
 
 /*
-This class generates Mersenne primes up to and including a supplied maximum.
-It utilises the GMP library.
+This class finds Mersenne primes 
+within a given range of numbers inclusively.
+It utilises the multi precision mathematical GMP library.
 Written by: Pete Kane
 Date: 12-11-2023
+Some people have too much time on their hands.
 */
 class MersennePrimes
 {
 public:
-	MersennePrimes(int Maximum, bool GiveFeedback);
+	MersennePrimes(int StartRange, int EndRange, bool GiveFeedback);
 	void GenerateListOfMersennes();
 	std::vector<int> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
@@ -30,7 +32,8 @@ private:
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t NextPossiblePrime;
 	const int Probability = 50; // Used by GMP in primality check.
-	int Maximum; // Generate mersennes up to and including this number.
+	int StartRange; // Generate mersennes starting at this number.
+	int EndRange; // and ends at this
 	std::vector<Pow2Result> Results;
 };
 
