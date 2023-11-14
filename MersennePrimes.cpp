@@ -8,6 +8,9 @@ MersennePrimes::MersennePrimes(int StartRange,int EndRange, bool GiveFeedback)
 	this->EndRange = EndRange;
 	this->GiveFeedback = GiveFeedback;
 
+	this->StartRange+= this->StartRange % 2 == 0 ? 1 : 0;
+	this->EndRange+= this->EndRange % 2 == 0 ? 1 : 0;
+
 	mpz_init_set_ui(this->One,1);
 	mpz_init_set_ui(this->Pow2Value,0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
@@ -35,8 +38,8 @@ void MersennePrimes::GenerateListOfMersennes()
 			// The following statement places the value of i in this->LoopValue.
 	
 		mpz_init_set_ui(this->LoopValue, i);
-		// Get next prime.
-		mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
+		//// Get next prime.
+		//mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
 
 		Prime = mpz_probab_prime_p(this->LoopValue, this->Probability) == 2;
 	
@@ -70,8 +73,6 @@ void MersennePrimes::GenerateListOfMersennes()
 		}
 		else
 			i++;
-
-		
 	}
 }
 
