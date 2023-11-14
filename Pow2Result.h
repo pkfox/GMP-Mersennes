@@ -1,4 +1,7 @@
+#ifdef _WIN32
 #pragma once
+#endif
+
 #include <gmpxx.h>
 #include <sstream>
 class Pow2Result

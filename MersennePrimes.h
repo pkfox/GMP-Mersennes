@@ -1,4 +1,6 @@
+#ifdef _WIN32
 #pragma once
+#endif
 #include <gmpxx.h>
 #include <vector>
 #include <sstream>

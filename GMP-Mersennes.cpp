@@ -33,8 +33,10 @@ int main(int argc, char** argv)
 	// Displaying the elapsed time
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 
+#ifdef DEBUG
     std::cout << "Press any key\n";
-	std::string s;
-	std::getline(std::cin, s);
+    std::string s;
+    std::getline(std::cin, s);
+#endif
 	return 0;
 }
