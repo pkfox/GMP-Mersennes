@@ -1,4 +1,5 @@
 #include "MersennePrimes.h"
+#include "PrimeStatus.h"
 
 // ctor accepting a start and end range
 // and a boolean indicating feedback preference.
@@ -7,57 +8,38 @@ MersennePrimes::MersennePrimes(int StartRange,int EndRange, bool GiveFeedback)
 	this->StartRange = StartRange;
 	this->EndRange = EndRange;
 	this->GiveFeedback = GiveFeedback;
-
-	this->StartRange+= this->StartRange % 2 == 0 ? 1 : 0;
-	this->EndRange+= this->EndRange % 2 == 0 ? 1 : 0;
-
 	mpz_init_set_ui(this->One,1);
 	mpz_init_set_ui(this->Pow2Value,0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 	mpz_init_set_ui(this->LoopValue, 0);
 	mpz_init_set_ui(this->NextPossiblePrime, 0);
+	this->AnnounceRunDetails();
 }
 
-// Generates a vector of ints containing mersennes.
+// Populates a vector of integers containing mersenne primes.
 void MersennePrimes::GenerateListOfMersennes()
 {
-	int i = this->StartRange;
 	bool Prime;
-	// Get first prime.
-	mpz_init_set_ui(this->LoopValue, i);
-	mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
+	int PrimeProbability = 0;
+	PrimeStatus ps;
 
-	// Trying to save some iterations by jumping to the next prime.
-	i = mpz_get_ui(this->NextPossiblePrime);
-
-	while(i <= this->EndRange)
+	for(int i = this->StartRange; i <= this->EndRange;i++)
 	{
-		if(i % 500 == 0 && this->GiveFeedback)
-			std::cout << i << "\n";
-
-			// The following statement places the value of i in this->LoopValue.
-	
+		// The following statement places the value of i in this->LoopValue.
 		mpz_init_set_ui(this->LoopValue, i);
-		//// Get next prime.
-		//mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
+		PrimeProbability = mpz_probab_prime_p(this->LoopValue, this->Probability);
+		Prime = PrimeProbability > 0;
 
-		Prime = mpz_probab_prime_p(this->LoopValue, this->Probability) == 2;
-	
 		if (Prime)
 		{
 			// Raise 2 ^ i and put the result in this->Pow2Value
 			mpz_ui_pow_ui(this->Pow2Value,this->Two, i);
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 			mpz_sub(this->Pow2MinusOneValue,this->Pow2Value,this->One);
-		  
-			// Get next prime.
-			mpz_nextprime(this->NextPossiblePrime, this->LoopValue);
-		
-			// Trying to save some iterations by jumping to the next prime.
 			
-			i = mpz_get_ui(this->NextPossiblePrime);
+			PrimeProbability = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
+			Prime = PrimeProbability > 0;
 
-			Prime = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) == 2;
 			// and test for primality.
 			// The possible return values from mpz_probab_prime_p are
 			// 0 = Definitely not a prime
@@ -66,13 +48,14 @@ void MersennePrimes::GenerateListOfMersennes()
 
 			if (Prime)
 			{
-				Pow2Result pr(this->LoopValue,this->Pow2MinusOneValue);
+				if (this->GiveFeedback)
+					std::cout << i << ps.GetStatus(PrimeProbability) << "\n";
+
+				Pow2Result pr(this->LoopValue,this->Pow2MinusOneValue, PrimeProbability);
 				this->Results.push_back(pr);
 				this->MPrimes.push_back(i);
 			}
 		}
-		else
-			i++;
 	}
 }
 
@@ -96,4 +79,13 @@ std::string MersennePrimes::Summary()
 	msg << "for the range starting at " << this->StartRange;
 	msg << " and ending " << this->EndRange << ".";
 	return msg.str();
+}
+
+void MersennePrimes::AnnounceRunDetails()
+{
+	std::stringstream msg;
+	msg << "Searching for Mersenne primes ";
+	msg << "for range " << this->StartRange;
+	msg << " -> " << this->EndRange << ".\n";
+	std::cout << msg.str();
 }

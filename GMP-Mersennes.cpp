@@ -7,6 +7,8 @@
 #include "MersennePrimes.h"
 #include <chrono>
 
+
+
 void PrintMessage(std::string msg)
 {
 	std::cout << msg << "\n";

@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <iostream>
+#include <map>
 #include "Pow2Result.h"
 
 /*
@@ -37,5 +38,6 @@ private:
 	int StartRange; // Generate mersennes starting at this number.
 	int EndRange; // and ends at this
 	std::vector<Pow2Result> Results;
+	void AnnounceRunDetails();
 };
 
