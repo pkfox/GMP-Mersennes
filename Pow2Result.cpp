@@ -12,16 +12,15 @@ Pow2Result::Pow2Result(mpz_t Prime, mpz_t Result, int PrimeProbability) :Pow2Res
 	mpz_set(this->Prime,Prime);
 	mpz_set(this->Result,Result);
 	this->PrimeProbability = PrimeProbability;
+	this->ResultLen = mpz_sizeinbase(this->Result, 10);
 }
 
 
 
 std::string Pow2Result::Summary()
 {
-	size_t ResultLen = mpz_sizeinbase(this->Result,10);
-	//PrimeStatus ps;
 	std::stringstream msg;
-	msg << "((2 ^ " << this->Prime << ") -1) is " << this->Result << " which " << MyPrimeStatus::GetStatus(this->PrimeProbability);
-	msg << " and has " << ResultLen << " digit" << (ResultLen > 1 ? "s":"");
+	msg << "((2 ^ " << this->Prime << ") -1) is " << this->Result << " which " << PrimeStatus::GetStatus(this->PrimeProbability);
+	msg << " and has " << ResultLen << " digit" << (this->ResultLen > 1 ? "s":"") << ".";
 	return msg.str();
 }

@@ -1,13 +1,17 @@
+#ifdef _WIN32
+#pragma once
+#endif
+
 #include <string>
 #include<map>
 
-class MyPrimeStatus
+static class PrimeStatus
 {
 public:
-	MyPrimeStatus();
 	static std::string GetStatus(int PrimeProbability);
 private:
-	static std::map<int, std::string> PrimeStatuses;
+	static inline std::map<int, std::string> PrimeStatuses;
+	static void InitMap();
 };
 
 
