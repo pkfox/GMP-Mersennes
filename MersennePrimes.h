@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MERSENNEPRIMES_H
+#define MERSENNEPRIMES_H
 #include <gmpxx.h>
 #include <vector>
 #include <sstream>
@@ -38,4 +39,5 @@ private:
 	std::vector<Pow2Result> Results;
 	void AnnounceRunDetails();
 };
+#endif
 

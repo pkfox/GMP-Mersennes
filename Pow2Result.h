@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 #include "PrimeStatus.h"
 #include <gmpxx.h>
 #include <sstream>
