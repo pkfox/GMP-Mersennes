@@ -1,4 +1,5 @@
-//#pragma once
+#ifndef POW2RESULT_H
+#define POW2RESULT_H
 #include "PrimeStatus.h"
 #include <gmpxx.h>
 #include <sstream>
@@ -20,4 +21,4 @@ public:
 	// This returns a brief description of the computation.
 	std::string Summary();
 };
-
+#endif

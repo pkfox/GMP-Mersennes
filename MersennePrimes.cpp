@@ -20,6 +20,7 @@ MersennePrimes::MersennePrimes(int StartRange,int EndRange, bool GiveFeedback)
 void MersennePrimes::GenerateListOfMersennes()
 {
 	bool Prime;
+	bool MersennePrime;
 	int PrimeProbability = 0;
 	
 	for(int i = this->StartRange; i <= this->EndRange;i++)
@@ -37,7 +38,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			mpz_sub(this->Pow2MinusOneValue,this->Pow2Value,this->One);
 			
 			PrimeProbability = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
-			Prime = PrimeProbability > 0;
+			MersennePrime = PrimeProbability > 0;
 
 			// and test for primality.
 			// The possible return values from mpz_probab_prime_p are
@@ -45,10 +46,10 @@ void MersennePrimes::GenerateListOfMersennes()
 			// 1 = Possibly a prime
 			// 2 = Definitely a prime
 
-			if (Prime)
+			if (MersennePrime)
 			{
-				/*if (this->GiveFeedback)
-					std::cout << i << ps.GetStatus(PrimeProbability) << "\n";*/
+				if (this->GiveFeedback)
+					std::cout << i << PrimeStatus::GetStatus(PrimeProbability) << "\n";
 
 				Pow2Result pr(this->LoopValue,this->Pow2MinusOneValue, PrimeProbability);
 				this->Results.push_back(pr);
