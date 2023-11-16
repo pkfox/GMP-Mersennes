@@ -5,7 +5,7 @@
 #include <string>
 #include<map>
 
-static class PrimeStatus
+class PrimeStatus
 {
 public:
 	static std::string GetStatus(int PrimeProbability);
