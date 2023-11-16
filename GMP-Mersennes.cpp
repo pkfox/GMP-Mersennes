@@ -32,10 +32,10 @@ int main(int argc, char** argv)
 
 	auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - beg);
 
-	// Displaying the elapsed time
+	// Display the elapsed time
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 
-#ifdef DEBUG
+#ifdef _WIN32
     std::cout << "Press any key\n";
     std::string s;
     std::getline(std::cin, s);

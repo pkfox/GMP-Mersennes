@@ -18,8 +18,10 @@ Pow2Result::Pow2Result(mpz_t Prime, mpz_t Result, int PrimeProbability) :Pow2Res
 
 std::string Pow2Result::Summary()
 {
-	PrimeStatus ps;
+	size_t ResultLen = mpz_sizeinbase(this->Result,10);
+	//PrimeStatus ps;
 	std::stringstream msg;
-	msg << "((2 ^ " << this->Prime << ") -1) is " << this->Result << " which " << ps.GetStatus(this->PrimeProbability);
+	msg << "((2 ^ " << this->Prime << ") -1) is " << this->Result << " which " << MyPrimeStatus::GetStatus(this->PrimeProbability);
+	msg << " and has " << ResultLen << " digit" << (ResultLen > 1 ? "s":"");
 	return msg.str();
 }

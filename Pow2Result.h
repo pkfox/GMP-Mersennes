@@ -4,6 +4,8 @@
 #include "PrimeStatus.h"
 #include <gmpxx.h>
 #include <sstream>
+#include <map>
+
 class Pow2Result
 {
 public:

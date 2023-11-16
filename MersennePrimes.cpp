@@ -21,8 +21,7 @@ void MersennePrimes::GenerateListOfMersennes()
 {
 	bool Prime;
 	int PrimeProbability = 0;
-	PrimeStatus ps;
-
+	
 	for(int i = this->StartRange; i <= this->EndRange;i++)
 	{
 		// The following statement places the value of i in this->LoopValue.
@@ -48,8 +47,8 @@ void MersennePrimes::GenerateListOfMersennes()
 
 			if (Prime)
 			{
-				if (this->GiveFeedback)
-					std::cout << i << ps.GetStatus(PrimeProbability) << "\n";
+				/*if (this->GiveFeedback)
+					std::cout << i << ps.GetStatus(PrimeProbability) << "\n";*/
 
 				Pow2Result pr(this->LoopValue,this->Pow2MinusOneValue, PrimeProbability);
 				this->Results.push_back(pr);
