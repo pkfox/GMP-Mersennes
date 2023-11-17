@@ -6,6 +6,7 @@
 #include <gmpxx.h>
 #include "MersennePrimes.h"
 #include <chrono>
+#include <algorithm>
 
 
 
@@ -18,8 +19,9 @@ int main(int argc, char** argv)
 {
 	auto beg = std::chrono::high_resolution_clock::now();
 
-	int StartRange = atoi(argv[1]);
-	int EndRange = atoi(argv[2]);
+	int StartRange = std::min(atoi(argv[1]),atoi(argv[2]));
+	int EndRange = std::max(atoi(argv[1]), atoi(argv[2]));
+
 	std::vector<Pow2Result> Results;
 	MersennePrimes mp(StartRange,EndRange, argc > 3);
 	mp.GenerateListOfMersennes();

@@ -22,10 +22,19 @@ void MersennePrimes::GenerateListOfMersennes()
 	bool Prime;
 	bool MersennePrime;
 	int PrimeProbability = 0;
-	
+
+	//mpz_t firstprime;
+	//mpz_init_set_ui(firstprime, this->StartRange);
+	//// Get first prime.
+	//mpz_nextprime(this->NextPossiblePrime, firstprime);
+	//// Start at the first prime.
+	//this->StartRange = mpz_get_ui(this->NextPossiblePrime);
+	//
+
 	for(int i = this->StartRange; i <= this->EndRange;i++)
 	{
-		// The following statement places the value of i in this->LoopValue.
+		// The following statement places 
+		// the value of i in this->LoopValue.
 		mpz_init_set_ui(this->LoopValue, i);
 		PrimeProbability = mpz_probab_prime_p(this->LoopValue, this->Probability);
 		Prime = PrimeProbability > 0;

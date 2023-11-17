@@ -6,7 +6,8 @@ std::string PrimeStatus::GetStatus(int PrimeProbability)
 	if (PrimeStatuses.size() == 0)
 		InitMap();
 
-	return PrimeStatuses[PrimeProbability];
+	return PrimeStatuses.count(PrimeProbability) > 0 ? 
+	PrimeStatuses[PrimeProbability]:"No status found";
 }
 
 void PrimeStatus::InitMap()
