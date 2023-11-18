@@ -1,4 +1,3 @@
 is definitely not a Mersenne prime
 is possibly a Mersenne prime
 is definitely a Mersenne prime
-a custom message from Pete
