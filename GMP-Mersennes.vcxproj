@@ -141,7 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GMP-Mersennes.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="MersennePrimes.cpp" />
     <ClCompile Include="Pow2Result.cpp" />
     <ClCompile Include="PrimeStatus.cpp" />
