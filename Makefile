@@ -200,7 +200,7 @@ CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"main\" -DPACKAGE_TARNAME=\"main\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"main\ 0.1\" -DPACKAGE_BUGREPORT=\"pete@pjksolutions.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"main\" -DVERSION=\"0.1\" -DHAVE_LIBGMP=1 -DHAVE_LIBGMPXX=1
+DEFS = -DPACKAGE_NAME=\"main\" -DPACKAGE_TARNAME=\"main\" -DPACKAGE_VERSION=\"9.42\" -DPACKAGE_STRING=\"main\ 9.42\" -DPACKAGE_BUGREPORT=\"pete@pjksolutions.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"main\" -DVERSION=\"9.42\" -DHAVE_LIBGMP=1 -DHAVE_LIBGMPXX=1
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -222,15 +222,15 @@ OBJEXT = o
 PACKAGE = main
 PACKAGE_BUGREPORT = pete@pjksolutions.com
 PACKAGE_NAME = main
-PACKAGE_STRING = main 0.1
+PACKAGE_STRING = main 9.42
 PACKAGE_TARNAME = main
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1
+PACKAGE_VERSION = 9.42
 PATH_SEPARATOR = :
 SET_MAKE = 
 SHELL = /bin/bash
 STRIP = 
-VERSION = 0.1
+VERSION = 9.42
 abs_builddir = /home/pjk/Projects/C++/MersennePrimes/GMP-Mersennes
 abs_srcdir = /home/pjk/Projects/C++/MersennePrimes/GMP-Mersennes
 abs_top_builddir = /home/pjk/Projects/C++/MersennePrimes/GMP-Mersennes

@@ -1,19 +1,23 @@
 #include "PrimeStatus.h"
 
-// This method returns the prime probability as returned by GMP.
 std::string PrimeStatus::GetStatus(int PrimeProbability)
 {
-	if (PrimeStatuses.size() == 0)
-		InitMap();
+   if (PrimeStatuses.size() == 0)
+      InitMap();
 
-	return PrimeStatuses.count(PrimeProbability) > 0 ? 
-	PrimeStatuses[PrimeProbability]:"No status found";
+   return PrimeStatuses.count(PrimeProbability) > 0 ? PrimeStatuses[PrimeProbability]:"No status found";
 }
 
 void PrimeStatus::InitMap()
 {
-	PrimeStatuses.insert(std::pair<int, std::string>(0, " is definitely not a prime"));
-	PrimeStatuses.insert(std::pair<int, std::string>(1, " is possibly a prime"));
-	PrimeStatuses.insert(std::pair<int, std::string>(2, " is definitely a prime"));
+   std::ifstream file("mersennestatuses.txt");
+   int i = 0;
+   for(std::string line;getline(file,line);)
+    {
+       PrimeStatuses.insert(std::pair<int, std::string>(i,line));
+       std::cout << line << "\n";
+       ++i;
+    }
+    file.close();
 }
 

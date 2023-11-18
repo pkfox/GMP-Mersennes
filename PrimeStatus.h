@@ -3,6 +3,8 @@
 
 #include <string>
 #include<map>
+#include <fstream>
+#include <iostream>
 
 class PrimeStatus
 {
