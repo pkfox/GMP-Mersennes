@@ -26,7 +26,10 @@ int main(int argc, char** argv)
 	MersennePrimes mp(StartRange,EndRange, argc > 3);
 	mp.GenerateListOfMersennes();
 	Results = mp.GetResults();
-	
+
+	if (Results.size() == 0)
+		PrintMessage("No mersennes found");
+
 	for(Pow2Result Result:Results)
 		PrintMessage(Result.Summary());
 
