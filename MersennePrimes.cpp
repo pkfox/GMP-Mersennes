@@ -23,24 +23,18 @@ void MersennePrimes::GenerateListOfMersennes()
 	bool MersennePrime;
 	int PrimeProbability = 0;
 
-	//mpz_t firstprime;
-	//mpz_init_set_ui(firstprime, this->StartRange);
+	mpz_t firstprime;
+	mpz_init_set_ui(firstprime, this->StartRange);
+
 	//// Get first prime.
-	//mpz_nextprime(this->NextPossiblePrime, firstprime);
-	//// Start at the first prime.
-	//this->StartRange = mpz_get_ui(this->NextPossiblePrime);
-	//
+	mpz_nextprime(this->NextPossiblePrime, firstprime);
+	int i = mpz_get_ui(this->NextPossiblePrime);
+	
+	PrimeProbability = mpz_probab_prime_p(this->NextPossiblePrime, this->Probability);
+	Prime = PrimeProbability > 0;
 
-	for(int i = this->StartRange; i <= this->EndRange;i++)
+	while(Prime && i <= this->EndRange)
 	{
-		// The following statement places 
-		// the value of i in this->LoopValue.
-		mpz_init_set_ui(this->LoopValue, i);
-		PrimeProbability = mpz_probab_prime_p(this->LoopValue, this->Probability);
-		Prime = PrimeProbability > 0;
-
-		if (Prime)
-		{
 			// Raise 2 ^ i and put the result in this->Pow2Value
 			mpz_ui_pow_ui(this->Pow2Value,this->Two, i);
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
@@ -64,9 +58,9 @@ void MersennePrimes::GenerateListOfMersennes()
 				this->Results.push_back(pr);
 				this->MPrimes.push_back(i);
 			}
+			i++;
 		}
 	}
-}
 
 // Returns a vector of ints containing the mersennes.
 std::vector<int> MersennePrimes::GetMPrimes()
