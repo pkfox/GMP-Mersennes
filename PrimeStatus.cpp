@@ -12,9 +12,10 @@ void PrimeStatus::InitMap()
 {
    std::ifstream file("mersennestatuses.txt");
    int i = 0;
-   for(std::string line; getline(file,line) ; i++)
+   std::string line;
+   for(;getline(file,line); i++)
    {
-       PrimeStatuses.insert(std::pair<int, std::string>(i,line));
+	  PrimeStatuses[i] = line;
    }
     file.close();
 }

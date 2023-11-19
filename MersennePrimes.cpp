@@ -45,7 +45,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			mpz_ui_pow_ui(this->Pow2Value,this->Two, i);
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 			mpz_sub(this->Pow2MinusOneValue,this->Pow2Value,this->One);
-			
+
 			PrimeProbability = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
 			MersennePrime = PrimeProbability > 0;
 
