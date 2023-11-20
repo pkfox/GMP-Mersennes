@@ -32,12 +32,14 @@ private:
 	mpz_t LoopValue;  // What it says it is.
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
-	mpz_t NextPossiblePrime;
+	mpz_t CurrentPrime; 
 	const int Probability = 50; // Used by GMP in primality check.
 	int StartRange; // Generate mersennes starting at this number.
 	int EndRange; // and ends at this
+	int LoopIndex;
 	std::vector<Pow2Result> Results;
 	void AnnounceRunDetails();
+	void GetNextPrime();
 };
 #endif
 

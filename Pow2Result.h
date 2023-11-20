@@ -4,6 +4,7 @@
 #include <gmpxx.h>
 #include <sstream>
 #include <map>
+#include <pqxx/pqxx>
 
 class Pow2Result
 {
@@ -20,5 +21,8 @@ public:
 	int PrimeProbability;
 	// This returns a brief description of the computation.
 	std::string Summary();
+	pqxx::connection PGConnection;
+	//("host=nuc port=5432 dbname=commands user=postgres password=Giraffes09");
+	pqxx::zview ConnectionString;
 };
 #endif
