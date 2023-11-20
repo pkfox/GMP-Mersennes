@@ -2,13 +2,14 @@
 
 Pow2Result::Pow2Result()
 {
-	this->ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
+//	this->ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
+//	this->PGConnection = pqxx::connection("host=nuc port=5432 dbname=commands user=postgres password=Giraffes09");
+
+//	std::cout << PGConnection.is_open() << "\n";
 	this->ResultLen = 0;
 	this->PrimeProbability = 0;
 	mpz_init_set_ui(this->Prime, 0);
 	mpz_init_set_ui(this->Result,0);
-	const char* cs = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
-	this->PGConnection = new pqxx::connection(cs);
 }
 
 Pow2Result::Pow2Result(mpz_t Prime, mpz_t Result, int PrimeProbability) :Pow2Result()
@@ -18,8 +19,6 @@ Pow2Result::Pow2Result(mpz_t Prime, mpz_t Result, int PrimeProbability) :Pow2Res
 	this->PrimeProbability = PrimeProbability;
 	this->ResultLen = mpz_sizeinbase(this->Result, 10);
 }
-
-
 
 std::string Pow2Result::Summary()
 {
