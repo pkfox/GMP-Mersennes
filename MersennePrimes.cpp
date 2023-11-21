@@ -50,11 +50,10 @@ void MersennePrimes::GenerateListOfMersennes()
 			Pow2Result pr(this->LoopValue, this->Pow2MinusOneValue, PrimeProbability);
 			this->Results.push_back(pr);
 			this->MPrimes.push_back(this->LoopIndex);
-			std::stringstream ss;
-			unsigned long long int x = mpz_get_ui(this->Pow2MinusOneValue);
-			ss << x;
+			std::string s;
+			s = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
 			mpz_init_set_ui(this->Pow2MinusOneValue, 0);
-			PGMersenne pgm(this->LoopIndex, ss.str());
+			PGMersenne pgm(this->LoopIndex, s);
 			std::size_t RetVal = pgm.EditMersenne();
 		}
 		this->GetNextPrime();

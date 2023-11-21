@@ -15,7 +15,6 @@ private:
 	int Primepower;
 	std::string Mersenneprime;
 	std::string ConnectionString;
-	//pqxx::connection PGConnection;
 };
 #endif
 
