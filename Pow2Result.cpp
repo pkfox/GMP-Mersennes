@@ -2,10 +2,6 @@
 
 Pow2Result::Pow2Result()
 {
-//	this->ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
-//	this->PGConnection = pqxx::connection("host=nuc port=5432 dbname=commands user=postgres password=Giraffes09");
-
-//	std::cout << PGConnection.is_open() << "\n";
 	this->ResultLen = 0;
 	this->PrimeProbability = 0;
 	mpz_init_set_ui(this->Prime, 0);

@@ -30,7 +30,7 @@ public:
 private:
 	mpz_t One; // Used for subtraction from pow 2.
 	const unsigned int Two = 2; // Used for exponential calculation.
-	mpz_t LoopValue;  // What it says it is.
+	mpz_t LoopValue;  // The value of LoopIndex.
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; 

@@ -1,9 +1,9 @@
 #ifndef POW2RESULT_H
 #define POW2RESULT_H
 #include "PrimeStatus.h"
-#include <gmpxx.h>
 #include <sstream>
 #include <map>
+#include <gmpxx.h>
 
 class Pow2Result
 {

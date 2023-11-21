@@ -9,11 +9,13 @@ class PGMersenne
 {
 public:
 	PGMersenne(int primepower, std::string mersenneprime);
-	std::string ConnectionString;
-	int EditMersenne();
+	std::size_t EditMersenne();
+
 private:
 	int Primepower;
 	std::string Mersenneprime;
+	std::string ConnectionString;
+	//pqxx::connection PGConnection;
 };
 #endif
 
