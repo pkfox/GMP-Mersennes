@@ -15,7 +15,7 @@ void PrimeStatus::InitMap()
    std::string line;
    for(;getline(file,line); i++)
    {
-	  PrimeStatuses[i] = " " + line;
+	  PrimeStatuses[i] = line;
    }
     file.close();
 }

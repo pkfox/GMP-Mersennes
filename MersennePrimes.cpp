@@ -53,7 +53,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			std::string s;
 			s = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
 			mpz_init_set_ui(this->Pow2MinusOneValue, 0);
-			PGMersenne pgm(this->LoopIndex, s);
+			PGMersenne pgm(this->LoopIndex, s,PrimeProbability);
 			std::size_t RetVal = pgm.EditMersenne();
 		}
 		this->GetNextPrime();
