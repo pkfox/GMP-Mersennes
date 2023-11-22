@@ -34,7 +34,7 @@ private:
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; 
-	const int Probability = 50; // Used by GMP in primality check.
+	const int Probability = 15; // Used by GMP in primality check.
 	int StartRange; // Generate mersennes starting at this number.
 	int EndRange; // and ends at this
 	int LoopIndex;

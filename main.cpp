@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 
 #ifdef _WIN32
-    std::cout << "Press any key\n";
+    std::cout << "Press the enter key\n";
     std::string s;
     std::getline(std::cin, s);
 #endif
