@@ -12,7 +12,7 @@ MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool GiveFeedback)
 	mpz_init_set_ui(this->Pow2Value, 0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 	mpz_init_set_ui(this->LoopValue, 0);
-	mpz_init_set_ui(this->CurrentPrime, this->StartRange - 1);
+	mpz_init_set_ui(this->CurrentPrime, static_cast<mpir_ui>(this->StartRange) - 1);
 	this->GetNextPrime();
 	this->AnnounceRunDetails();
 }
@@ -23,6 +23,7 @@ void MersennePrimes::GenerateListOfMersennes()
 	bool Prime = false;
 	bool MersennePrime = false;
 	int PrimeProbability = 0;
+	std::size_t RetVal = -1;
 
 	while (this->LoopIndex <= this->EndRange)
 	{
@@ -42,7 +43,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		if (MersennePrime)
 		{
 			if (this->GiveFeedback)
-				std::cout << this->LoopIndex << PrimeStatus::GetStatus(PrimeProbability) << "\n";
+				std::cout << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability) << "\n";
 
 			// Copy index to this->LoopValue
 			mpz_init_set_ui(this->LoopValue, this->LoopIndex);
@@ -52,9 +53,9 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->MPrimes.push_back(this->LoopIndex);
 			std::string s;
 			s = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-			mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 			PGMersenne pgm(this->LoopIndex, s,PrimeProbability);
-			std::size_t RetVal = pgm.EditMersenne();
+			RetVal = pgm.EditMersenne();
+			std::cout << RetVal << " row updated\n";
 		}
 		this->GetNextPrime();
 	}

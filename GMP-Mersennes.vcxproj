@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\vcpkg\packages\libpqxx_x64-windows\include\</IncludePath>
-    <LibraryPath>C:\vcpkg\packages\gmp_x64-windows\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\vcpkg\buildtrees\gmp;C:\vcpkg\packages\libpqxx_x64-windows\include\</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22000.0\um\x64;C:\vcpkg\buildtrees\libpqxx;C:\vcpkg\buildtrees\libpq;C:\vcpkg\buildtrees\gmp</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64</LibraryPath>
@@ -83,7 +83,8 @@
     <LibraryPath>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\vcpkg\packages\libpqxx_x64-windows\include\</IncludePath>
+    <IncludePath>C:\vcpkg\buildtrees\gmp;C:\vcpkg\packages\libpqxx_x64-windows\include\</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\lib\onecore\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22000.0\um\x64;C:\vcpkg\buildtrees\libpqxx;C:\vcpkg\buildtrees\libpq;C:\vcpkg\buildtrees\gmp</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,7 +120,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,7 +135,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

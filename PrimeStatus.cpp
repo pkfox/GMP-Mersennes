@@ -2,10 +2,22 @@
 
 std::string PrimeStatus::GetStatus(int PrimeProbability)
 {
+    std::string RetVal;
+
    if (PrimeStatuses.size() == 0)
       InitMap();
 
-   return PrimeStatuses.count(PrimeProbability) > 0 ? PrimeStatuses[PrimeProbability]:"No status found";
+   return PrimeStatuses.count(PrimeProbability) > 0 ? PrimeStatuses[PrimeProbability]:RetVal;
+}
+
+std::string PrimeStatus::GetStatusMessage(int PrimeProbability)
+{
+    std::string RetVal;
+
+    if (PrimeStatusMessages.size() == 0)
+        InitMap();
+
+    return PrimeStatusMessages.count(PrimeProbability) > 0 ? PrimeStatusMessages[PrimeProbability] : RetVal;
 }
 
 void PrimeStatus::InitMap()
@@ -16,6 +28,7 @@ void PrimeStatus::InitMap()
    for(;getline(file,line); i++)
    {
 	  PrimeStatuses[i] = line;
+      PrimeStatusMessages[i] = " is " + line;
    }
     file.close();
 }
