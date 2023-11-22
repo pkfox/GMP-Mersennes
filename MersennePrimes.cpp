@@ -12,7 +12,7 @@ MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool GiveFeedback)
 	mpz_init_set_ui(this->Pow2Value, 0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 	mpz_init_set_ui(this->LoopValue, 0);
-	mpz_init_set_ui(this->CurrentPrime, static_cast<mpir_ui>(this->StartRange) - 1);
+	mpz_init_set_ui(this->CurrentPrime, this->StartRange);
 	this->GetNextPrime();
 	this->AnnounceRunDetails();
 }
