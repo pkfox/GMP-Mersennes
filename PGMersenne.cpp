@@ -6,6 +6,7 @@ PGMersenne::PGMersenne(int primepower, std::string mersenneprime,int PrimeProbab
     this->Mersenneprime = mersenneprime;
     this->PrimeProbability = PrimeProbability;
     this->ConnectionString.append("host=nuc port=5432 dbname=commands user=postgres password=Giraffes09");
+    this->PGConnection = pqxx::connection(this->ConnectionString);
 }
 
 std::size_t PGMersenne::EditMersenne()
