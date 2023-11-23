@@ -24,7 +24,6 @@ public:
 	void GenerateListOfMersennes();
 	std::vector<int> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
-	std::vector<int> MPrimes;
 	std::string Summary();
 	bool GiveFeedback;
 private:
@@ -33,14 +32,19 @@ private:
 	mpz_t LoopValue;  // The value of LoopIndex.
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
-	mpz_t CurrentPrime; 
+	mpz_t CurrentPrime; // The current prime
 	const int Probability = 15; // Used by GMP in primality check.
 	int StartRange; // Generate mersennes starting at this number.
 	int EndRange; // and ends at this
 	int LoopIndex;
 	std::vector<Pow2Result> Results;
 	void AnnounceRunDetails();
-	void GetNextPrime();
+	void GetNextPrime(); // Gets next prime
+	bool Prime = false; // True if normal prime
+	bool MersennePrime = false; // True if mersenne prime
+	int PrimeProbability = 0;// Return value from GMP primality function
+	std::size_t RetVal = 0; // Return value from database function
+	std::vector<int> MPrimes;
 };
 #endif
 
