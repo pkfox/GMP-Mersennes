@@ -46,10 +46,10 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->Results.push_back(pr);
 			this->MPrimes.push_back(this->LoopIndex);
 			this->PowerValue = mpz_get_str(NULL, 10,this->Pow2MinusOneValue);
-		//	MersennePrime mp(this->LoopIndex,this->PowerValue,this->PrimeProbability);
-		//	PGMersenne pgm(mp);
-		//	this->RetVal = pgm.EditMersenne();
-		//	std::cout << this->RetVal << " row updated\n";
+			MersennePrime mp(this->LoopIndex,this->PowerValue,this->PrimeProbability);
+			PGMersenne pgm(mp);
+			this->RetVal = pgm.EditMersenne();
+			std::cout << this->RetVal << " row updated\n";
 		}
 		this->GetNextPrime();
 	}
