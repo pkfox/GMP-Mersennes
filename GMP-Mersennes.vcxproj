@@ -146,12 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MersennePrime.cpp" />
     <ClCompile Include="MersennePrimes.cpp" />
     <ClCompile Include="PGMersenne.cpp" />
     <ClCompile Include="Pow2Result.cpp" />
     <ClCompile Include="PrimeStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MersennePrime.h" />
     <ClInclude Include="MersennePrimes.h" />
     <ClInclude Include="PGMersenne.h" />
     <ClInclude Include="Pow2Result.h" />

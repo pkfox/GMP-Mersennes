@@ -1,5 +1,5 @@
 #include "MersennePrimes.h"
-#include "PrimeStatus.h"
+
 
 // ctor accepting a start and end range
 // and a boolean indicating feedback preference.
@@ -29,28 +29,27 @@ void MersennePrimes::GenerateListOfMersennes()
 
 		this->PrimeProbability = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
 		// and test for primality probability.
-		this->MersennePrime = this->PrimeProbability > 0;
+		this->isMersennePrime = this->PrimeProbability > 0;
 		// The possible return values from mpz_probab_prime_p are
 		// 0 = Definitely not a prime
 		// 1 = Possibly a prime
 		// 2 = Definitely a prime
 
-		if (this->MersennePrime)
+		if (this->isMersennePrime)
 		{
 			if (this->GiveFeedback)
 				std::cout << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability) << "\n";
 
 			// Copy index to this->LoopValue
 			mpz_init_set_ui(this->LoopValue, this->LoopIndex);
-
 			Pow2Result pr(this->LoopValue, this->Pow2MinusOneValue, PrimeProbability);
 			this->Results.push_back(pr);
 			this->MPrimes.push_back(this->LoopIndex);
-			std::string PowerValue;
-			PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-			PGMersenne pgm(this->LoopIndex, PowerValue,PrimeProbability);
-			this->RetVal = pgm.EditMersenne();
-			std::cout << this->RetVal << " row updated\n";
+			this->PowerValue = mpz_get_str(NULL, 10,this->Pow2MinusOneValue);
+		//	MersennePrime mp(this->LoopIndex,this->PowerValue,this->PrimeProbability);
+		//	PGMersenne pgm(mp);
+		//	this->RetVal = pgm.EditMersenne();
+		//	std::cout << this->RetVal << " row updated\n";
 		}
 		this->GetNextPrime();
 	}

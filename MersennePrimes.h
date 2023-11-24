@@ -8,6 +8,8 @@
 #include <map>
 #include "Pow2Result.h"
 #include "PGMersenne.h"
+#include "PrimeStatus.h"
+#include "MersennePrime.h"
 
 /*
 This class finds Mersenne primes 
@@ -38,13 +40,14 @@ private:
 	int EndRange; // and ends at this
 	int LoopIndex;
 	std::vector<Pow2Result> Results;
-	void AnnounceRunDetails();
+	void AnnounceRunDetails(); // Brief show of runtime parameters
 	void GetNextPrime(); // Gets next prime
-	bool Prime = false; // True if normal prime
-	bool MersennePrime = false; // True if mersenne prime
+	bool isPrime = false; // True if normal prime
+	bool isMersennePrime = false; // True if mersenne prime
 	int PrimeProbability = 0;// Return value from GMP primality function
 	std::size_t RetVal = 0; // Return value from database function
-	std::vector<int> MPrimes;
+	std::vector<int> MPrimes; // The Mersenne primes
+	std::string PowerValue; // The P2 -1 value of a possible mersenne.
 };
 #endif
 
