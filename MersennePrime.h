@@ -1,14 +1,14 @@
 #ifndef	MERSENNEPRIME_H
 #define MERSENNEPRIME_H
-//#include "PrimeStatus.h"
 #include <sstream>
 #include <string>
-
+#include <pqxx/pqxx>
 
 class MersennePrime
 {
 public:
 	MersennePrime();
+	MersennePrime(std::string name);
 	MersennePrime(int Prime, std::string Result, int PrimeProbability);
 	// Stores the 2 ^ Prime result.
 	std::string Result;
@@ -17,5 +17,7 @@ public:
 	// Probability returned by GMP.
 	int PrimeProbability;
 	std::string PrimeProbabilityText;
+	std::string PGTypeName;
 };
+
 #endif

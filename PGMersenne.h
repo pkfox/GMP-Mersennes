@@ -6,7 +6,7 @@
 #include <iostream>
 #include "PrimeStatus.h"
 #include "MersennePrime.h"
-
+#include <typeinfo> 
 class PGMersenne
 {
 public:
@@ -15,7 +15,7 @@ public:
 private:
 	MersennePrime Mersenneprime;
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
-    pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
+	pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
 };
 #endif
 

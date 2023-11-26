@@ -9,6 +9,10 @@
 #include <algorithm>
 
 
+namespace pqxx
+{
+	template<> std::string const type_name<MersennePrime>{"Mersenne name"};
+}
 
 void PrintMessage(std::string msg)
 {

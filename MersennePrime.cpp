@@ -1,7 +1,13 @@
 #include "MersennePrime.h"
 
+
 MersennePrime::MersennePrime()
 {
+}
+
+MersennePrime::MersennePrime(std::string name)
+{
+	this->PGTypeName = name;
 }
 
 MersennePrime::MersennePrime(int Prime, std::string Result, int PrimeProbability)
