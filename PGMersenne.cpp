@@ -1,9 +1,11 @@
 #include "PGMersenne.h"
 
-PGMersenne::PGMersenne(MersennePrime mp)
+PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability)
 {
-	this->Mersenneprime = mp;
-	this->Mersenneprime.PrimeProbabilityText = PrimeStatus::GetStatus(mp.PrimeProbability);
+	this->Mersenne = Mersenne;
+	this->MersenneResult = MersenneResult;
+	this->Probability = Probability;
+	this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 }
 
 std::size_t PGMersenne::EditMersenne()
@@ -16,15 +18,10 @@ std::size_t PGMersenne::EditMersenne()
 			return -1;
 		}
 
-		this->PGConnection.prepare("editmersenne", "select editmersenne($1)");
+		this->PGConnection.prepare("editmersenne", "select editmersenne($1,$2,$3)");
 		pqxx::transaction txn(this->PGConnection);
-	
-		typedef MersennePrime x;
-		x xx = this->Mersenneprime;
 
-		std::cout << typeid(this->Mersenneprime).name() << "\n";
-
-		pqxx::result r(txn.exec_prepared("editmersenne",xx));
+		pqxx::result r(txn.exec_prepared("editmersenne",this->Mersenne,this->MersenneResult,this->PrimeProbabilityText));
 		txn.commit();
 		return r.affected_rows();
 	}

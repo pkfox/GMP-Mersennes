@@ -5,15 +5,17 @@
 #include <sstream>
 #include <iostream>
 #include "PrimeStatus.h"
-#include "MersennePrime.h"
 #include <typeinfo> 
 class PGMersenne
 {
 public:
-	PGMersenne(MersennePrime mp);
+	PGMersenne(int Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
 private:
-	MersennePrime Mersenneprime;
+	int Mersenne;
+	std::string MersenneResult;
+	int Probability;
+	std::string PrimeProbabilityText;
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
 	pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
 };

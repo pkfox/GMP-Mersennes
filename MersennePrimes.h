@@ -7,9 +7,8 @@
 #include <iostream>
 #include <map>
 #include "Pow2Result.h"
-#include "PGMersenne.h"
 #include "PrimeStatus.h"
-#include "MersennePrime.h"
+#include "PGMersenne.h"
 
 /*
 This class finds Mersenne primes 
