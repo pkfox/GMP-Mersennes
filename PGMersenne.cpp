@@ -10,6 +10,7 @@ PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability
 
 size_t PGMersenne::EditMersenne()
 {
+	size_t RetVal = -1;
 	try
 	{
 		if (!this->PGConnection.is_open())
@@ -23,7 +24,8 @@ size_t PGMersenne::EditMersenne()
 
 		pqxx::result r(txn.exec_prepared("editmersenne",this->Mersenne,this->MersenneResult,this->PrimeProbabilityText));
 		txn.commit();
-		return r[0][0].as<int>();
+		RetVal = r[0][0].as<size_t>();
+		return RetVal;
 	}
 	catch (std::exception const& ex)
 	{
