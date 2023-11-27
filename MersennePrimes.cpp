@@ -48,7 +48,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->PowerValue = mpz_get_str(NULL, 10,this->Pow2MinusOneValue);
 			PGMersenne pgm(this->LoopIndex,this->PowerValue,this->PrimeProbability);
 			this->RetVal = pgm.EditMersenne();
-			std::cout << this->RetVal << " row updated\n";
+			std::cout << "Row id " << this->RetVal << " updated\n";
 		}
 		this->GetNextPrime();
 	}

@@ -8,7 +8,7 @@ PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability
 	this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 }
 
-std::size_t PGMersenne::EditMersenne()
+size_t PGMersenne::EditMersenne()
 {
 	try
 	{
@@ -23,7 +23,7 @@ std::size_t PGMersenne::EditMersenne()
 
 		pqxx::result r(txn.exec_prepared("editmersenne",this->Mersenne,this->MersenneResult,this->PrimeProbabilityText));
 		txn.commit();
-		return r.affected_rows();
+		return r[0][0].as<int>();
 	}
 	catch (std::exception const& ex)
 	{
