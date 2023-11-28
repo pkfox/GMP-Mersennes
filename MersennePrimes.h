@@ -11,7 +11,7 @@
 #include "PGMersenne.h"
 
 /*
-This class finds Mersenne primes 
+This class finds Mersenne primes 2
 within a given range of numbers inclusively.
 It utilises the multi precision mathematical GMP library.
 Written by: Pete Kane
@@ -21,9 +21,9 @@ Some people have too much time on their hands.
 class MersennePrimes
 {
 public:
-	MersennePrimes(int StartRange, int EndRange, bool GiveFeedback);
+	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback);
 	void GenerateListOfMersennes();
-	std::vector<int> GetMPrimes();
+	std::vector<mpir_ui> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
 	std::string Summary();
 	bool GiveFeedback;
@@ -34,18 +34,18 @@ private:
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; // The current prime
-	const int Probability = 15; // Used by GMP in primality check.
-	int StartRange; // Generate mersennes starting at this number.
-	int EndRange; // and ends at this
-	int LoopIndex;
+	const unsigned int Probability = 15; // Used by GMP in primality check.
+	mpir_ui StartRange; // Generate mersennes starting at this number.
+	mpir_ui EndRange; // and ends at this
+	mpir_ui LoopIndex;
 	std::vector<Pow2Result> Results;
 	void AnnounceRunDetails(); // Brief show of runtime parameters
 	void GetNextPrime(); // Gets next prime
 	bool isPrime = false; // True if normal prime
 	bool isMersennePrime = false; // True if mersenne prime
-	int PrimeProbability = 0;// Return value from GMP primality function
+	unsigned int PrimeProbability = 0;// Return value from GMP primality function
 	std::size_t RetVal = 0; // Return value from database function
-	std::vector<int> MPrimes; // The Mersenne primes
+	std::vector<mpir_ui> MPrimes; // The Mersenne primes
 	std::string PowerValue; // The P2 -1 value of a possible mersenne.
 };
 #endif

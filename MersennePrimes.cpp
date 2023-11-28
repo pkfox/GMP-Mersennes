@@ -3,7 +3,7 @@
 
 // ctor accepting a start and end range
 // and a boolean indicating feedback preference.
-MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool GiveFeedback)
+MersennePrimes::MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback)
 {
 	this->StartRange = StartRange;
 	this->EndRange = EndRange;
@@ -55,7 +55,7 @@ void MersennePrimes::GenerateListOfMersennes()
 }
 
 // Returns a vector of ints containing the mersennes.
-std::vector<int> MersennePrimes::GetMPrimes()
+std::vector<mpir_ui> MersennePrimes::GetMPrimes()
 {
 	return this->MPrimes;
 }

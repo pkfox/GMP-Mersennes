@@ -18,8 +18,8 @@ int main(int argc, char** argv)
 {
 	auto beg = std::chrono::high_resolution_clock::now();
 
-	int StartRange = std::min(atoi(argv[1]),atoi(argv[2]));
-	int EndRange = std::max(atoi(argv[1]), atoi(argv[2]));
+	mpir_ui StartRange = std::min(atoi(argv[1]),atoi(argv[2]));
+	mpir_ui EndRange = std::max(atoi(argv[1]), atoi(argv[2]));
 
 	std::vector<Pow2Result> Results;
 	MersennePrimes mp(StartRange,EndRange, argc > 3);
