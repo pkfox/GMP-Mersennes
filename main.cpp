@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <iterator>
-#include <gmpxx.h>
 #include "MersennePrimes.h"
 #include <chrono>
 #include <algorithm>

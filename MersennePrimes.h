@@ -1,5 +1,6 @@
 #ifndef MERSENNEPRIMES_H
 #define MERSENNEPRIMES_H
+#include <gmp.h>
 #include <gmpxx.h>
 #include <vector>
 #include <sstream>
@@ -9,6 +10,7 @@
 #include "Pow2Result.h"
 #include "PrimeStatus.h"
 #include "PGMersenne.h"
+#include "Mytypedefs.h"
 
 /*
 This class finds Mersenne primes 2
@@ -21,6 +23,7 @@ Some people have too much time on their hands.
 class MersennePrimes
 {
 public:
+	
 	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback);
 	void GenerateListOfMersennes();
 	std::vector<mpir_ui> GetMPrimes();

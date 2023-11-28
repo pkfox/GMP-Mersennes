@@ -6,6 +6,7 @@
 #include <iostream>
 #include "PrimeStatus.h"
 #include <typeinfo> 
+
 class PGMersenne
 {
 public:
