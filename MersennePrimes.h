@@ -10,7 +10,8 @@
 #include "Pow2Result.h"
 #include "PrimeStatus.h"
 #include "PGMersenne.h"
-#include "Mytypedefs.h"
+//#include "Mytypedefs.h"
+#include <mpir.h>
 
 /*
 This class finds Mersenne primes 2
