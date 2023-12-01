@@ -14,7 +14,8 @@
 #include <mpir.h>
 
 /*
-This class finds Mersenne primes 2
+This class finds Mersenne primes ((2 ^ P)-1) 
+where P is a known prime
 within a given range of numbers inclusively.
 It utilises the multi precision mathematical GMP library.
 Written by: Pete Kane
@@ -38,7 +39,7 @@ private:
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; // The current prime
-	const unsigned int Probability = 15; // Used by GMP in primality check.
+	const unsigned int Probability = 50; // Used by GMP in primality check.
 	mpir_ui StartRange; // Generate mersennes starting at this number.
 	mpir_ui EndRange; // and ends at this
 	mpir_ui LoopIndex;

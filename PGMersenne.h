@@ -1,19 +1,21 @@
 #ifndef PGMERSENNE_H
 #define PGMERSENNE_H
 #include <pqxx/pqxx>
+#include <gmpxx.h>
 #include <string>
 #include <sstream>
 #include <iostream>
 #include "PrimeStatus.h"
-#include <typeinfo> 
+#include "MersennePrime.h"
 
 class PGMersenne
 {
 public:
-	PGMersenne(int Mersenne,std::string MersenneResult,int Probability);
+	PGMersenne(mpir_ui Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
 private:
-	int Mersenne;
+	MersennePrime MP;
+	mpir_ui Mersenne;
 	std::string MersenneResult;
 	int Probability;
 	std::string PrimeProbabilityText;

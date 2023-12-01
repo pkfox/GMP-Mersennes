@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MersennePrime.cpp" />
     <ClCompile Include="MersennePrimes.cpp" />
     <ClCompile Include="PGMersenne.cpp" />
     <ClCompile Include="Pow2Result.cpp" />
