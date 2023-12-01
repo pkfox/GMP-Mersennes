@@ -1,3 +1,3 @@
-Definitely not a prime
-Possibly a prime
-Definitely a prime
+Definitely not a Mersenne prime
+Possibly a Mersenne prime
+Definitely a Mersenne prime

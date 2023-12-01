@@ -38,7 +38,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		if (this->isMersennePrime)
 		{
 			if (this->GiveFeedback)
-				std::cout << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability) << "\n";
+				Utils::PrintMessage(PrimeStatus::GetStatusMessage(PrimeProbability));
 
 			// Copy index to this->LoopValue
 			mpz_init_set_ui(this->LoopValue, this->LoopIndex);
@@ -48,7 +48,9 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->PowerValue = mpz_get_str(NULL, 10,this->Pow2MinusOneValue);
 			PGMersenne pgm(this->LoopIndex,this->PowerValue,this->PrimeProbability);
 			this->RetVal = pgm.EditMersenne();
-			std::cout << "Row id " << this->RetVal << " updated\n";
+			std::stringstream ss;
+			ss << "Row id " << this->RetVal << " updated";
+			Utils::PrintMessage(ss.str());
 		}
 		this->GetNextPrime();
 	}

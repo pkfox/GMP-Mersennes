@@ -1,9 +1,9 @@
 #ifndef	MERSENNEPRIME_H
 #define MERSENNEPRIME_H
+#include <gmpxx.h>
+#include <pqxx/pqxx>
 #include <sstream>
 #include <string>
-#include <pqxx/pqxx>
-#include <gmpxx.h>
 
 class MersennePrime
 {
@@ -18,5 +18,4 @@ public:
 	int PrimeProbability;
 	std::string PrimeProbabilityText;
 };
-
 #endif

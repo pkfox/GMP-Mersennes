@@ -6,12 +6,7 @@
 #include "MersennePrimes.h"
 #include <chrono>
 #include <algorithm>
-
-
-void PrintMessage(std::string msg)
-{
-	std::cout << msg << "\n";
-}
+#include "Utils.h"
 
 int main(int argc, char** argv)
 {
@@ -26,10 +21,10 @@ int main(int argc, char** argv)
 	Results = mp.GetResults();
 
 	if (Results.size() == 0)
-		PrintMessage("No mersennes found");
+		Utils::PrintMessage("No mersennes found");
 
 	for(Pow2Result Result:Results)
-		PrintMessage(Result.Summary());
+		Utils::PrintMessage(Result.Summary());
 
 	auto end = std::chrono::high_resolution_clock::now();
 
@@ -39,7 +34,7 @@ int main(int argc, char** argv)
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 
 #ifdef _WIN32
-    std::cout << "Press the enter key\n";
+	Utils::PrintMessage("Press the enter key");
     std::string s;
     std::getline(std::cin, s);
 #endif

@@ -27,8 +27,7 @@ size_t PGMersenne::EditMersenne()
 		this->PGConnection.prepare("editmersenne", "select editmersenne($1,$2,$3)");
 		pqxx::transaction txn(this->PGConnection);
 		pqxx::result r(txn.exec_prepared("editmersenne",this->Mersenne,this->MersenneResult,this->PrimeProbabilityText));
-		
-
+	
 		txn.commit();
 		RetVal = r[0][0].as<size_t>();
 		return RetVal;
