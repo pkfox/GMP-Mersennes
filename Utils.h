@@ -4,11 +4,14 @@
 #include <string>
 #include <iostream>
 
-class Utils
+namespace pqxx
 {
-public:
-	static void PrintMessage(std::string msg);
-};
+	class Utils
+	{
+	public:
+		static void PrintMessage(std::string msg);
+	};
+}
 #endif
 
 

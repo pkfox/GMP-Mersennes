@@ -1,6 +1,9 @@
 #include "Utils.h"
 
-void Utils::PrintMessage(std::string msg)
+namespace pqxx
 {
-	std::cout << msg << "\n";
+	void Utils::PrintMessage(std::string msg)
+	{
+		std::cout << msg << "\n";
+	}
 }

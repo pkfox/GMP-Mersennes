@@ -4,39 +4,43 @@
 #include <vector>
 #include <iterator>
 #include "MersennePrimes.h"
+#include "MersennePrime.h"
 #include <chrono>
 #include <algorithm>
 #include "Utils.h"
 
-int main(int argc, char** argv)
-{
-	auto beg = std::chrono::high_resolution_clock::now();
+using namespace pqxx;
 
-	mpir_ui StartRange = std::min(atoi(argv[1]),atoi(argv[2]));
-	mpir_ui EndRange = std::max(atoi(argv[1]), atoi(argv[2]));
+	int main(int argc, char** argv)
+	{
+		auto beg = std::chrono::high_resolution_clock::now();
 
-	std::vector<Pow2Result> Results;
-	MersennePrimes mp(StartRange,EndRange, argc > 3);
-	mp.GenerateListOfMersennes();
-	Results = mp.GetResults();
+		mpir_ui StartRange = std::min(atoi(argv[1]), atoi(argv[2]));
+		mpir_ui EndRange = std::max(atoi(argv[1]), atoi(argv[2]));
 
-	if (Results.size() == 0)
-		Utils::PrintMessage("No mersennes found");
+		std::vector<Pow2Result> Results;
+		MersennePrimes mp(StartRange, EndRange, argc > 3);
+		mp.GenerateListOfMersennes();
+		Results = mp.GetResults();
 
-	for(Pow2Result Result:Results)
-		Utils::PrintMessage(Result.Summary());
+		if (Results.size() == 0)
+			Utils::PrintMessage("No mersennes found");
 
-	auto end = std::chrono::high_resolution_clock::now();
+		for (Pow2Result Result : Results)
+			Utils::PrintMessage(Result.Summary());
 
-	auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - beg);
+		auto end = std::chrono::high_resolution_clock::now();
 
-	// Display the elapsed time
-	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
+		auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - beg);
+
+		// Display the elapsed time
+		std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 
 #ifdef _WIN32
-	Utils::PrintMessage("Press the enter key");
-    std::string s;
-    std::getline(std::cin, s);
+		Utils::PrintMessage("Press the enter key");
+		std::string s;
+		std::getline(std::cin, s);
 #endif
-	return 0;
-}
+		return 0;
+	}
+

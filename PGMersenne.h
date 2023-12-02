@@ -8,13 +8,15 @@
 #include "PrimeStatus.h"
 #include "MersennePrime.h"
 
+namespace pqxx
+{
 class PGMersenne
 {
 public:
 	PGMersenne(mpir_ui Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
 private:
-	MersennePrime MP;
+	pqxx::MersennePrime MP;
 	mpir_ui Mersenne;
 	std::string MersenneResult;
 	int Probability;
@@ -22,5 +24,6 @@ private:
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
 	pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
 };
+}
 #endif
 
