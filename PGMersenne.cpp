@@ -9,9 +9,9 @@ namespace pqxx
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 
-		/*this->MP.Prime = Mersenne;
+		this->MP.Prime = Mersenne;
 		this->MP.Result = Result;
-		this->MP.PrimeProbabilityText = this->PrimeProbabilityText;*/
+		this->MP.PrimeProbabilityText = this->PrimeProbabilityText;
 	}
 
 	size_t PGMersenne::EditMersenne()
@@ -25,10 +25,10 @@ namespace pqxx
 				return -1;
 			}
 
-			this->PGConnection.prepare("editmersenne", "select editmersenne($1)");
+			this->PGConnection.prepare("editmersenne", "select editmersenne($1,$2,$3)");
 			pqxx::transaction txn(this->PGConnection);
-		//	pqxx::result r(txn.exec_prepared("editmersenne", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText));
-			pqxx::result r(txn.exec_prepared("editmersenne", this->MP));
+			pqxx::result r(txn.exec_prepared("editmersenne", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText));
+		//	pqxx::result r(txn.exec_prepared("editmersenne", this->MP));
 
 			txn.commit();
 			RetVal = r[0][0].as<size_t>();
