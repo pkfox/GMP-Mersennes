@@ -9,7 +9,7 @@ namespace pqxx
 	class Utils
 	{
 	public:
-		static void PrintMessage(std::string msg);
+		static void PrintMessage(std::string msg,int OptionalNumber = -1);
 	};
 }
 #endif

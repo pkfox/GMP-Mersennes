@@ -39,8 +39,9 @@ namespace pqxx
 			if (this->isMersennePrime)
 			{
 				if (this->GiveFeedback)
-					Utils::PrintMessage(PrimeStatus::GetStatusMessage(PrimeProbability));
-
+				{
+					Utils::PrintMessage(PrimeStatus::GetStatusMessage(PrimeProbability), this->LoopIndex);
+				}
 				// Copy index to this->LoopValue
 				mpz_init_set_ui(this->LoopValue, this->LoopIndex);
 				Pow2Result pr(this->LoopValue, this->Pow2MinusOneValue, PrimeProbability);

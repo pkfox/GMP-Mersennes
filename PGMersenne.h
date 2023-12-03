@@ -7,6 +7,7 @@
 #include <iostream>
 #include "PrimeStatus.h"
 #include "MersennePrime.h"
+#include "Utils.h"
 
 namespace pqxx
 {

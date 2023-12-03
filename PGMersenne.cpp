@@ -21,7 +21,7 @@ namespace pqxx
 		{
 			if (!this->PGConnection.is_open())
 			{
-				std::cout << "Connection is closed\n";
+				Utils::PrintMessage("Connection is closed");
 				return -1;
 			}
 
