@@ -7,8 +7,7 @@
 
 namespace pqxx
 {
-	//template<> std::string const pqxx::type_name<MersennePrime>{"MersennePrime"};
-
+	typedef mp_limb_t mpir_ui;
 	class MersennePrime
 	{
 	public:
