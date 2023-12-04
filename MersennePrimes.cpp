@@ -21,6 +21,10 @@ namespace pqxx
 	// Populates a vector of integers containing mersenne primes.
 	void MersennePrimes::GenerateListOfMersennes()
 	{
+		std::stringstream ss;
+	    ss << "Starting with prime " << this->LoopIndex;
+		Utils::PrintMessage(ss.str());
+		
 		while (this->LoopIndex <= this->EndRange)
 		{
 			// Raise 2 ^ i and put the result in this->Pow2Value
