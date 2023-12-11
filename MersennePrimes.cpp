@@ -32,7 +32,9 @@ namespace pqxx
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 			mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
 
-			this->PrimeProbability = mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
+			this->PrimeProbability = 1;
+
+				//mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
 			// and test for primality probability.
 			this->isMersennePrime = this->PrimeProbability > 0;
 			// The possible return values from mpz_probab_prime_p are
