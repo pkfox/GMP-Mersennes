@@ -12,7 +12,7 @@
 using namespace pqxx;
 
 static void GetData();
-static std::vector<mpir_ui> Primes;
+static std::vector<int> Primes;
 
 	int main(int argc, char** argv)
 	{
@@ -67,23 +67,21 @@ static void GetData()
 {
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
 	pqxx::connection PGConnection = pqxx::connection(ConnectionString);
-	PGConnection.prepare("test", "select getprimes()");
+	//PGConnection.prepare("getprimes", "select getprimes()");
 	pqxx::transaction txn(PGConnection);
-	pqxx::result r(txn.exec_prepared("test"));
+	/*pqxx::result r(txn.exec_prepared("getprimes"));
 
-	auto begin = r.begin();
-	auto end = r.end();
+	Primes = std::vector<int>(r.begin(), r.end());*/
 
-	Primes.assign(r.cbegin(),r.cend());
-	
-	for (auto row = r.begin(); row != r.end(); row++)
+	for (auto [Prime] : txn.stream<int>("select getprimes()"))
 	{
-		for (auto field = row.begin(); field != row.end(); field++)
-		{
-			Primes.push_back(field->as<mpir_ui>());
-		}
+		Primes.push_back(Prime);
 	}
+
+	/*for(auto [Prime] : r.begin().as<int>())
+	{
+		Primes.push_back(Prime);
+	}*/
 	txn.commit();
-	PGConnection.close();
 }
 
