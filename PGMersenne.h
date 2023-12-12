@@ -9,22 +9,23 @@
 #include "MersennePrime.h"
 #include "Utils.h"
 
-namespace pqxx
-{
 class PGMersenne
 {
 public:
+	PGMersenne();
 	PGMersenne(mpir_ui Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
+	void GetData(std::vector<int>& Primes);
 private:
-	pqxx::MersennePrime MP;
+	MersennePrime MP;
 	mpir_ui Mersenne;
 	std::string MersenneResult;
 	int Probability;
 	std::string PrimeProbabilityText;
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
 	pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
+	pqxx::transaction PGTransaction = pqxx::transaction(this->PGConnection);
 };
-}
+
 #endif
 

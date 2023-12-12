@@ -4,14 +4,11 @@
 #include <string>
 #include <iostream>
 
-namespace pqxx
+class Utils
 {
-	class Utils
-	{
-	public:
-		static void PrintMessage(std::string msg,int OptionalNumber = -1);
-	};
-}
+public:
+	static void PrintMessage(std::string msg, int OptionalNumber = -1);
+};
 #endif
 
 

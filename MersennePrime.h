@@ -5,21 +5,20 @@
 #include <sstream>
 #include <string>
 
-namespace pqxx
+
+typedef mp_limb_t mpir_ui;
+class MersennePrime
 {
-	typedef mp_limb_t mpir_ui;
-	class MersennePrime
-	{
-	public:
-		MersennePrime();
-		MersennePrime(mpir_ui Prime, std::string Result, int PrimeProbability);
-		// Stores the 2 ^ Prime - 1 result.
-		std::string Result;
-		// Stores the prime.
-		mpir_ui Prime;
-		// Probability returned by GMP.
-		int PrimeProbability;
-		std::string PrimeProbabilityText;
-	};
-}
+public:
+	MersennePrime();
+	MersennePrime(mpir_ui Prime, std::string Result, int PrimeProbability);
+	// Stores the 2 ^ Prime - 1 result.
+	std::string Result;
+	// Stores the prime.
+	mpir_ui Prime;
+	// Probability returned by GMP.
+	int PrimeProbability;
+	std::string PrimeProbabilityText;
+};
+
 #endif
