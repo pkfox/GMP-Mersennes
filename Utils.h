@@ -7,7 +7,7 @@
 class Utils
 {
 public:
-	static void PrintMessage(std::string msg, int OptionalNumber = -1);
+	static void PrintMessage(std::string msg);
 };
 #endif
 

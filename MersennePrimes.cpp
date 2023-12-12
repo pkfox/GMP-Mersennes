@@ -44,7 +44,9 @@ void MersennePrimes::GenerateListOfMersennes()
 		{
 			if (this->GiveFeedback)
 			{
-				Utils::PrintMessage(PrimeStatus::GetStatusMessage(PrimeProbability), this->LoopIndex);
+				std::stringstream ss;
+				ss << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability);
+				Utils::PrintMessage(ss.str());
 			}
 			// Copy index to this->LoopValue
 			mpz_init_set_ui(this->LoopValue, this->LoopIndex);

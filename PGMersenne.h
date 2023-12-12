@@ -24,7 +24,8 @@ private:
 	std::string PrimeProbabilityText;
 	std::string ConnectionString = "host=nuc port=5432 dbname=commands user=postgres password=Giraffes09";
 	pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
-	pqxx::transaction PGTransaction = pqxx::transaction(this->PGConnection);
+	pqxx::work PGTransaction = pqxx::work(PGConnection);
+	pqxx::result PGResult;
 };
 
 #endif

@@ -1,9 +1,6 @@
 #include "Utils.h"
 
-void Utils::PrintMessage(std::string msg, int OptionalNumber)
+void Utils::PrintMessage(std::string msg)
 {
-	if (OptionalNumber >= 0)
-		std::cout << OptionalNumber << " ";
-
 	std::cout << msg << "\n";
 }

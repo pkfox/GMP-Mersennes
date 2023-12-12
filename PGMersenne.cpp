@@ -1,7 +1,7 @@
 #include "PGMersenne.h"
 
 
-PGMersenne::PGMersenne()
+PGMersenne::PGMersenne():PrimeProbabilityText(""),MersenneResult(""),Mersenne(0),Probability(0)
 {
 }
 
@@ -28,11 +28,9 @@ size_t PGMersenne::EditMersenne()
 			return -1;
 		}
 
-		this->PGConnection.prepare("editmersenne", "select editmersenne($1,$2,$3)");
-		pqxx::transaction txn(this->PGConnection);
-		pqxx::result r(txn.exec_prepared("editmersenne", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText));
-		txn.commit();
-		RetVal = r[0][0].as<size_t>();
+		this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)",this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
+		this->PGTransaction.commit();
+		RetVal = this->PGResult[0][0].as<size_t>();
 		return RetVal;
 	}
 	catch (std::exception const& ex)
@@ -49,12 +47,9 @@ void PGMersenne::GetData(std::vector<int>& Primes)
 		Utils::PrintMessage("Connection is closed");
 		return;
 	}
-
-	pqxx::transaction txn(this->PGConnection);
-
-	pqxx::result r(txn.exec("select getprimes()"));
+	this->PGResult = this->PGTransaction.exec("select getprimes()");
 	// Store query results in vector.  This converts each row to an arguments list
 	// (in this case just the one field) and calls the lambda we pass.
-	r.for_each([&Primes](int prime) { Primes.push_back(prime); });
-	txn.commit();
+	this->PGResult.for_each([&Primes](int prime) { Primes.push_back(prime); });
+	this->PGTransaction.commit();
 }
