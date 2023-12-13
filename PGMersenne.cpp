@@ -47,9 +47,11 @@ void PGMersenne::GetData(std::vector<int>& Primes)
 		Utils::PrintMessage("Connection is closed");
 		return;
 	}
-	this->PGResult = this->PGTransaction.exec("select getprimes()");
+	// this->PGResult = this->PGTransaction.exec("select getprimes()");
 	// Store query results in vector.  This converts each row to an arguments list
 	// (in this case just the one field) and calls the lambda we pass.
-	this->PGResult.for_each([&Primes](int prime) { Primes.push_back(prime); });
+        for(auto [prime] : this->PGTransaction.stream<int>("select getprimes()"))
+           Primes.push_back(prime);
+	//this->PGResult.for_each([&Primes](int prime) { Primes.push_back(prime); });
 	this->PGTransaction.commit();
 }
