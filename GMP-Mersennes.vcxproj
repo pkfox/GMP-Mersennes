@@ -154,7 +154,6 @@
     <ClCompile Include="Pow2Result.cpp" />
     <ClCompile Include="PrimeStatus.cpp" />
     <ClCompile Include="Utils.cpp" />
-    <ClCompile Include="\\nuc\nucroot\home\pjk\Projects\C++\MersennePrimes\GMP-Mersennes\TestStuff\ExampleResultError.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MersennePrime.h" />

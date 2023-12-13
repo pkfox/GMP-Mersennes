@@ -15,7 +15,7 @@ public:
 	PGMersenne();
 	PGMersenne(mpir_ui Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
-	void GetData(std::vector<int>& Primes);
+	void GetData(std::vector<int> &Primes);
 private:
 	MersennePrime MP;
 	mpir_ui Mersenne;

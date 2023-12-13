@@ -36,9 +36,6 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="\\nuc\nucroot\home\pjk\Projects\C++\MersennePrimes\GMP-Mersennes\TestStuff\ExampleResultError.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MersennePrimes.h">

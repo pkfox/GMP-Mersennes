@@ -40,18 +40,19 @@ size_t PGMersenne::EditMersenne()
 	return 0;
 }
 
-void PGMersenne::GetData(std::vector<int>& Primes)
+void PGMersenne::GetData(std::vector<int> & Primes)
 {
 	if (!this->PGConnection.is_open())
 	{
 		Utils::PrintMessage("Connection is closed");
 		return;
 	}
-	// this->PGResult = this->PGTransaction.exec("select getprimes()");
-	// Store query results in vector.  This converts each row to an arguments list
-	// (in this case just the one field) and calls the lambda we pass.
-        for(auto [prime] : this->PGTransaction.stream<int>("select getprimes()"))
-           Primes.push_back(prime);
-	//this->PGResult.for_each([&Primes](int prime) { Primes.push_back(prime); });
+	
+	this->PGResult = this->PGTransaction.exec("select getprimes()");
+	
+	for (auto const& row : this->PGResult)
+		for (auto const& field : row)
+			Primes.push_back(field.as<int>());
+
 	this->PGTransaction.commit();
 }
