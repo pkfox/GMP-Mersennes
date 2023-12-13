@@ -14,7 +14,7 @@ public:
 private:
 	static inline std::map<int, std::string> PrimeStatuses;
 	static inline std::map<int, std::string> PrimeStatusMessages;
-	static void InitMap();
+	 static void InitMap();
 };
 #endif
 
