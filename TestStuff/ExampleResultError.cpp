@@ -27,7 +27,7 @@ int main()
         // point, execution will have left the block, and the transaction will
         // have been destroyed along the way.  In that case, the failed
         // transaction would implicitly abort instead of getting to this point.
-        w.commit();
+      //  w.commit();
 
         // Look at the first and only field in the row, parse it as an integer,
         // and print it.

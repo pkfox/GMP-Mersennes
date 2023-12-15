@@ -1,6 +1,7 @@
-SRCS = $(wildcard *.cpp) $(wildcard *.h)
-LIBS = -lgmpxx -lgmp -lpq -lpqxx 
-CXXFLAGS = -std=c++17
+SRCS = $(wildcard *.cpp)
+LIBS = -lpqxx -lpq
+ 
+CXXFLAGS = -std=c++20
 
 example:$(SRCS) clean
 	$(CXX) $(CXXFLAGS) $(SRCS) $(LIBS) -o $@

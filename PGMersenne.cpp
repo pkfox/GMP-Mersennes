@@ -47,12 +47,7 @@ void PGMersenne::GetData(std::vector<int> & Primes)
 		Utils::PrintMessage("Connection is closed");
 		return;
 	}
-	
-	this->PGResult = this->PGTransaction.exec("select getprimes()");
-	
-	for (auto const& row : this->PGResult)
-		for (auto const& field : row)
-			Primes.push_back(field.as<int>());
 
+	this->PGTransaction.exec("select getprimes()").for_each([&Primes](int prime) { Primes.push_back(prime); });
 	this->PGTransaction.commit();
 }

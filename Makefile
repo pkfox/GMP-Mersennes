@@ -1,5 +1,6 @@
-SRCS = $(wildcard *.cpp) $(wildcard *.h)
-LIBS = -lgmpxx -lgmp -lpq -lpqxx 
+SRCS = $(wildcard *.cpp) 
+#$(wildcard *.h)
+LIBS = -lgmpxx -lgmp -lpqxx -lpq 
 CXXFLAGS = -std=c++17
 
 mersenneprimes:$(SRCS) clean
