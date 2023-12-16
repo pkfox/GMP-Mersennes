@@ -27,7 +27,7 @@ size_t PGMersenne::EditMersenne()
 			Utils::PrintMessage("Connection is closed");
 			return -1;
 		}
-		
+
 		this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)",this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
 		this->PGTransaction.commit();
 		RetVal = this->PGResult[0][0].as<size_t>();
