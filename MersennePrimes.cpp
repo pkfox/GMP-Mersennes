@@ -33,7 +33,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		this->PrimeProbability = 2;
 
 		//mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
-	// and test for primality probability.
+	        // and test for primality probability.
 		this->isMersennePrime = this->PrimeProbability > 0;
 		// The possible return values from mpz_probab_prime_p are
 		// 0 = Definitely not a prime
@@ -88,11 +88,11 @@ std::string MersennePrimes::Summary()
 
 void MersennePrimes::AnnounceRunDetails()
 {
-	std::stringstream msg;
-	msg << "Searching for Mersenne primes ";
-	msg << "for range " << this->StartRange;
-	msg << " -> " << this->EndRange << ".\n";
-	std::cout << msg.str();
+	std::stringstream ss;
+	ss << "Searching for Mersenne primes ";
+	ss << "for range " << this->StartRange;
+	ss << " -> " << this->EndRange << ".\n";
+	Utils::PrintMessage(ss.str());
 }
 
 void MersennePrimes::GetNextPrime()
