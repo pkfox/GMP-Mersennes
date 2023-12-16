@@ -25,7 +25,7 @@ class MersennePrimes
 {
 public:
 
-	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback);
+	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback, bool SkipPrimalityCheck = true);
 	void GenerateListOfMersennes();
 	std::vector<mpir_ui> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
@@ -51,6 +51,8 @@ private:
 	std::size_t RetVal = 0; // Return value from database function
 	std::vector<mpir_ui> MPrimes; // The Mersenne primes
 	std::string PowerValue; // The P2 -1 value of a possible mersenne.
+	// What it says it is.
+	bool SkipPrimalityCheck = true;
 };
 #endif
 

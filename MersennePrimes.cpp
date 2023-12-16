@@ -2,11 +2,12 @@
 
 // ctor accepting a start and end range
 // and a boolean indicating feedback preference.
-MersennePrimes::MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback)
+MersennePrimes::MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback, bool SkipPrimalityCheck)
 {
 	this->StartRange = StartRange;
 	this->EndRange = EndRange;
 	this->GiveFeedback = GiveFeedback;
+	this->SkipPrimalityCheck = SkipPrimalityCheck;
 	mpz_init_set_ui(this->One, 1);
 	mpz_init_set_ui(this->Pow2Value, 0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
@@ -29,11 +30,10 @@ void MersennePrimes::GenerateListOfMersennes()
 		mpz_ui_pow_ui(this->Pow2Value, this->Two, this->LoopIndex);
 		// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
-
-		this->PrimeProbability = 2;
-
-		//mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
-	        // and test for primality probability.
+	
+		// and test for primality probability.
+		this->PrimeProbability = this->SkipPrimalityCheck ? 2: mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
+	        
 		this->isMersennePrime = this->PrimeProbability > 0;
 		// The possible return values from mpz_probab_prime_p are
 		// 0 = Definitely not a prime
