@@ -1,4 +1,4 @@
-SRCS = $(wildcard *.cpp)
+SRCS = $(wildcard Ex*.cpp)
 LIBS = -lpqxx -lpq
  
 CXXFLAGS = -std=c++20
@@ -8,3 +8,9 @@ example:$(SRCS) clean
 
 clean:
 	$(RM) example
+
+version:version.cpp cleanversion
+	$(CXX) $(CXXFLAGS) version.cpp $(LIBS) -o $@
+
+cleanversion:
+	$(RM) version
