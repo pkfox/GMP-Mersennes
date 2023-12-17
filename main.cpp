@@ -15,14 +15,20 @@ using namespace pqxx;
 	int main(int argc, char* argv[])
 	{
 		std::vector<std::string> Args(argv + 1, argv + argc);
-		
+                std::string Confirm;
 		bool SkipPrimalityTest = std::find(Args.begin(), Args.end(), "-skiptest") != Args.end();
-		bool GiveFeedback = std::find(Args.begin(), Args.end(), "-givefeedback") != Args.end();
+		bool ShowProgress = std::find(Args.begin(), Args.end(), "-showprogress") != Args.end();
 		std::stringstream ss;
-		ss << "Running mersenne search with these parameters\n";
-		ss << "Skip primality test = " << (SkipPrimalityTest ? "true" : "false") << "\n";
-		ss << "Give feedback = " << (GiveFeedback ? "true" : "false") << "\n";
-		Utils::PrintMessage(ss.str());
+		ss << "Mersenne search will " << (SkipPrimalityTest ? "skip" : "apply") << " the primality test\n";
+		ss << "Progress will " << (ShowProgress ? "" : "not ") << "be given\n";
+                ss << "Do you want to continue Y/N ? ";
+                std::cout << ss.str();
+
+                std::getline(std::cin,Confirm);
+
+                if(Confirm != "Y"  && Confirm != "y")
+                   return -1;
+
 
 		std::copy(argv, argv + argc, std::ostream_iterator<char*>(std::cout, "\n"));
 		mpir_ui StartRange;
@@ -31,7 +37,7 @@ using namespace pqxx;
 
 		std::vector<int> Primes;
 		auto beg = std::chrono::high_resolution_clock::now();
-	
+
 		PGMersenne pgm; 
 		pgm.GetData(Primes);
 
@@ -40,7 +46,7 @@ using namespace pqxx;
 			StartRange = Primes[i] - 1;
 			EndRange = Primes[i];
 			Results.clear();
-			MersennePrimes mp(StartRange, EndRange, GiveFeedback,SkipPrimalityTest);
+			MersennePrimes mp(StartRange, EndRange, ShowProgress,SkipPrimalityTest);
 			mp.GenerateListOfMersennes();
 			Results = mp.GetResults();
 
