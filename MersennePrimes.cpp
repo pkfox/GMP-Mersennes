@@ -2,11 +2,10 @@
 
 // ctor accepting a start and end range
 // and a boolean indicating feedback preference.
-MersennePrimes::MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback, bool SkipPrimalityCheck)
+MersennePrimes::MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool SkipPrimalityCheck)
 {
 	this->StartRange = StartRange;
 	this->EndRange = EndRange;
-	this->GiveFeedback = GiveFeedback;
 	this->SkipPrimalityCheck = SkipPrimalityCheck;
 	mpz_init_set_ui(this->One, 1);
 	mpz_init_set_ui(this->Pow2Value, 0);
@@ -26,7 +25,7 @@ void MersennePrimes::GenerateListOfMersennes()
 
 	while (this->LoopIndex <= this->EndRange)
 	{
-		// Raise 2 ^ i and put the result in this->Pow2Value
+		// Raise 2 ^ this->LoopIndex and put the result in this->Pow2Value
 		mpz_ui_pow_ui(this->Pow2Value, this->Two, this->LoopIndex);
 		// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
@@ -42,12 +41,11 @@ void MersennePrimes::GenerateListOfMersennes()
 
 		if (this->isMersennePrime)
 		{
-			if (this->GiveFeedback)
-			{
-				std::stringstream ss;
-				ss << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability);
-				Utils::PrintMessage(ss.str());
-			}
+			std::stringstream ss;
+			ss << this->LoopIndex << PrimeStatus::GetStatusMessage(PrimeProbability);
+			Utils::PrintMessage(ss.str());
+			ss.clear();
+			ss.str("");
 			// Copy index to this->LoopValue
 			mpz_init_set_ui(this->LoopValue, this->LoopIndex);
 			Pow2Result pr(this->LoopValue, this->Pow2MinusOneValue, PrimeProbability);
@@ -56,7 +54,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
 			PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability);
 			this->RetVal = pgm.EditMersenne();
-			std::stringstream ss;
+			
 			ss << "Row id " << this->RetVal << " updated";
 			Utils::PrintMessage(ss.str());
 		}

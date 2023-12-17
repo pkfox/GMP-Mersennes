@@ -25,7 +25,7 @@ class MersennePrimes
 {
 public:
 
-	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool GiveFeedback, bool SkipPrimalityCheck = true);
+	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool SkipPrimalityCheck = true);
 	void GenerateListOfMersennes();
 	std::vector<mpir_ui> GetMPrimes();
 	std::vector<Pow2Result> GetResults();
