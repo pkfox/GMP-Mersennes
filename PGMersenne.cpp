@@ -29,6 +29,8 @@ size_t PGMersenne::EditMersenne()
 		}
 
 		this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)",this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
+	//	this->PGResult = this->PGTransaction.exec_params("select editmersenne($1)", 0);
+
 		this->PGTransaction.commit();
 		RetVal = this->PGResult[0][0].as<size_t>();
 		return RetVal;

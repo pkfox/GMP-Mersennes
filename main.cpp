@@ -9,11 +9,13 @@
 #include <algorithm>
 #include "Utils.h"
 #include <algorithm>
+#include <regex>
 
 using namespace pqxx;
 
 	int main(int argc, char* argv[])
 	{
+		std::regex confirm_regex("Y",std::regex_constants::icase);
 		std::vector<std::string> Args(argv + 1, argv + argc);
 		mpir_ui StartRange;
 		mpir_ui EndRange;
@@ -29,10 +31,9 @@ using namespace pqxx;
         std::cout << ss.str();
         std::getline(std::cin,Confirm);
 
-		if(Confirm != "Y"  && Confirm != "y")
+		if (! std::regex_search(Confirm, confirm_regex))
 			return -1;
-
-		
+				
 		pgm.GetData(Primes);
 
 		for (size_t i = 0; i < Primes.size(); i++)

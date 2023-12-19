@@ -6,7 +6,7 @@
 #include <string>
 
 
-typedef mp_limb_t mpir_ui;
+//typedef mp_limb_t mpir_ui;
 class MersennePrime
 {
 public:
