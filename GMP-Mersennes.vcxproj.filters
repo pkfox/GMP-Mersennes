@@ -21,9 +21,6 @@
     <ClCompile Include="MersennePrimes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pow2Result.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PrimeStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,9 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MersennePrimes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pow2Result.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PrimeStatus.h">

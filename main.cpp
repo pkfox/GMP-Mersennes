@@ -17,9 +17,8 @@ int main(int argc, char* argv[])
 {
 	std::regex confirm_regex("Y", std::regex_constants::icase);
 	std::vector<std::string> Args(argv + 1, argv + argc);
-	mpir_ui StartRange;
-	mpir_ui EndRange;
-	std::vector<Pow2Result> Results;
+	int StartRange;
+	int EndRange;
 	std::vector<int> Primes;
 	auto beg = std::chrono::high_resolution_clock::now();
 	PGMersenne pgm;
@@ -41,12 +40,8 @@ int main(int argc, char* argv[])
 	{
 		StartRange = Primes[i] - 1;
 		EndRange = Primes[i];
-		Results.clear();
 		MersennePrimes mp(StartRange, EndRange, SkipPrimalityTest);
 		mp.GenerateListOfMersennes();
-		Results = mp.GetResults();
-		for (Pow2Result Result : Results)
-			Utils::PrintMessage(Result.Summary());
 	}
 
 	auto end = std::chrono::high_resolution_clock::now();

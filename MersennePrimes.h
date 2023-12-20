@@ -7,7 +7,6 @@
 #include <string>
 #include <iostream>
 #include <map>
-#include "Pow2Result.h"
 #include "PrimeStatus.h"
 #include "PGMersenne.h"
 #include "Utils.h"
@@ -24,32 +23,26 @@ Some people have too much time on their hands.
 class MersennePrimes
 {
 public:
-
-	MersennePrimes(mpir_ui StartRange, mpir_ui EndRange, bool SkipPrimalityCheck = true);
+	MersennePrimes(int StartRange, int EndRange, bool SkipPrimalityCheck = true);
 	void GenerateListOfMersennes();
-	std::vector<mpir_ui> GetMPrimes();
-	std::vector<Pow2Result> GetResults();
-	std::string Summary();
-	bool GiveFeedback;
+	std::vector<int> GetMPrimes();
 private:
 	mpz_t One; // Used for subtraction from pow 2.
 	const unsigned int Two = 2; // Used for exponential calculation.
-	mpz_t LoopValue;  // The value of LoopIndex.
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; // The current prime
 	const unsigned int Probability = 50; // Used by GMP in primality check.
-	mpir_ui StartRange; // Generate mersennes starting at this number.
-	mpir_ui EndRange; // and ends at this
-	mpir_ui LoopIndex;
-	std::vector<Pow2Result> Results;
+	int StartRange; // Generate mersennes starting at this number.
+	int EndRange; // and ends at this
+	unsigned long int LoopIndex;
 	void AnnounceRunDetails(); // Brief show of runtime parameters
 	void GetNextPrime(); // Gets next prime
 	bool isPrime = false; // True if normal prime
 	bool isMersennePrime = false; // True if mersenne prime
 	unsigned int PrimeProbability = 0;// Return value from GMP primality function
 	std::size_t RetVal = 0; // Return value from database function
-	std::vector<mpir_ui> MPrimes; // The Mersenne primes
+	std::vector<int> MPrimes; // The Mersenne primes
 	std::string PowerValue; // The P2 -1 value of a possible mersenne.
 	// What it says it is.
 	bool SkipPrimalityCheck = true;
