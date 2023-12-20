@@ -27,9 +27,6 @@
     <ClCompile Include="PGMersenne.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MersennePrime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PGMersenne.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MersennePrime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">

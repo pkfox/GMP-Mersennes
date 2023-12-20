@@ -6,19 +6,18 @@
 #include <sstream>
 #include <iostream>
 #include "PrimeStatus.h"
-#include "MersennePrime.h"
 #include "Utils.h"
 
 class PGMersenne
 {
 public:
+	PGMersenne(PGMersenne &mp);
 	PGMersenne();
-	PGMersenne(mpir_ui Mersenne,std::string MersenneResult,int Probability);
+	PGMersenne(int Mersenne,std::string MersenneResult,int Probability);
 	std::size_t EditMersenne();
 	void GetData(std::vector<int> &Primes);
 private:
-	MersennePrime MP;
-	mpir_ui Mersenne;
+	int Mersenne;
 	std::string MersenneResult;
 	int Probability;
 	std::string PrimeProbabilityText;
