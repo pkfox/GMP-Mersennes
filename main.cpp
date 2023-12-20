@@ -16,6 +16,8 @@ using namespace pqxx;
 int main(int argc, char* argv[])
 {
 	std::regex confirm_regex("Y", std::regex_constants::icase);
+	std::regex primality_regex("-C", std::regex_constants::icase);
+
 	std::vector<std::string> Args(argv + 1, argv + argc);
 	int StartRange;
 	int EndRange;
@@ -23,9 +25,9 @@ int main(int argc, char* argv[])
 	auto beg = std::chrono::high_resolution_clock::now();
 	PGMersenne pgm;
 	std::string Confirm;
-	bool SkipPrimalityTest = std::find(Args.begin(), Args.end(), "-skiptest") != Args.end();
+	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "",primality_regex);
 	std::stringstream ss;
-	ss << "Mersenne search will " << (SkipPrimalityTest ? "skip" : "apply") << " the primality test\n";
+	ss << "Mersenne search will " << (CheckPrimality ? "apply" : "skip") << " the primality test\n";
 	ss << "Do you want to continue Y/N ? ";
 
 	std::cout << ss.str();
@@ -40,7 +42,7 @@ int main(int argc, char* argv[])
 	{
 		StartRange = Primes[i] - 1;
 		EndRange = Primes[i];
-		MersennePrimes mp(StartRange, EndRange, SkipPrimalityTest);
+		MersennePrimes mp(StartRange, EndRange, CheckPrimality);
 		mp.GenerateListOfMersennes();
 	}
 

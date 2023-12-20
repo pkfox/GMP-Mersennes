@@ -23,7 +23,7 @@ Some people have too much time on their hands.
 class MersennePrimes
 {
 public:
-	MersennePrimes(int StartRange, int EndRange, bool SkipPrimalityCheck = true);
+	MersennePrimes(int StartRange, int EndRange, bool CheckPrimality = true);
 	void GenerateListOfMersennes();
 	std::vector<int> GetMPrimes();
 private:
@@ -33,8 +33,8 @@ private:
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; // The current prime
 	const unsigned int Probability = 50; // Used by GMP in primality check.
-	int StartRange; // Generate mersennes starting at this number.
-	int EndRange; // and ends at this
+	unsigned long int StartRange; // Generate mersennes starting at this number.
+	unsigned long int EndRange; // and ends at this
 	unsigned long int LoopIndex;
 	void AnnounceRunDetails(); // Brief show of runtime parameters
 	void GetNextPrime(); // Gets next prime
@@ -43,9 +43,9 @@ private:
 	unsigned int PrimeProbability = 0;// Return value from GMP primality function
 	std::size_t RetVal = 0; // Return value from database function
 	std::vector<int> MPrimes; // The Mersenne primes
-	std::string PowerValue; // The P2 -1 value of a possible mersenne.
-	// What it says it is.
-	bool SkipPrimalityCheck = true;
+	std::string PowerValue; // The ((2^P) -1) value of a possible mersenne.
+	// Optional primality check
+	bool CheckPrimality;
 };
 #endif
 

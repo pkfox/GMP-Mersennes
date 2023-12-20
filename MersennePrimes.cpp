@@ -1,12 +1,12 @@
 #include "MersennePrimes.h"
 
 // ctor accepting a start and end range
-// and a boolean indicating feedback preference.
-MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool SkipPrimalityCheck)
+// and a boolean indicating whether to apply a primality check.
+MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool CheckPrimality)
 {
 	this->StartRange = StartRange;
 	this->EndRange = EndRange;
-	this->SkipPrimalityCheck = SkipPrimalityCheck;
+	this->CheckPrimality = CheckPrimality;
 	mpz_init_set_ui(this->One, 1);
 	mpz_init_set_ui(this->Pow2Value, 0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
@@ -29,7 +29,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
 		// and test for primality probability.
-		this->PrimeProbability = this->SkipPrimalityCheck ? 2 : mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
+		this->PrimeProbability = this->CheckPrimality ? 2 : mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability);
 		this->isMersennePrime = this->PrimeProbability > 0;
 		// The possible return values from mpz_probab_prime_p are
 		// 0 = Definitely not a prime
@@ -75,6 +75,6 @@ void MersennePrimes::GetNextPrime()
 	// Get next prime.
 	mpz_nextprime(this->CurrentPrime, this->CurrentPrime);
 	// Set this->LoopIndex to the next prime.
-	this->LoopIndex = mpz_get_ui(this->CurrentPrime);
+	this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
 }
 
