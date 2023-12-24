@@ -4,7 +4,6 @@
 #include <vector>
 #include <iterator>
 #include "MersennePrimes.h"
-#include "MersennePrime.h"
 #include <chrono>
 #include <algorithm>
 #include "Utils.h"
