@@ -4,7 +4,6 @@
 #include <vector>
 #include <iterator>
 #include "MersennePrimes.h"
-#include "MersennePrime.h"
 #include <chrono>
 #include <algorithm>
 #include "Utils.h"
@@ -51,4 +50,10 @@ int main(int argc, char* argv[])
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 	return 0;
 }
+
+
+
+
+
+
 
