@@ -10,8 +10,6 @@
 #include <algorithm>
 #include <regex>
 
-using namespace pqxx;
-
 int main(int argc, char* argv[])
 {
 	std::regex confirm_regex("Y", std::regex_constants::icase);
@@ -22,9 +20,9 @@ int main(int argc, char* argv[])
 	int EndRange;
 	std::vector<int> Primes;
 	auto beg = std::chrono::high_resolution_clock::now();
-	PGMersenne pgm;
+	pjk::PGMersenne pgm;
 	std::string Confirm;
-	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "",primality_regex);
+	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "", primality_regex);
 	std::stringstream ss;
 	ss << "Mersenne search will " << (CheckPrimality ? "apply" : "skip") << " the primality test\n";
 	ss << "Do you want to continue Y/N ? ";
@@ -36,12 +34,14 @@ int main(int argc, char* argv[])
 		return -1;
 
 	pgm.GetData(Primes);
+	pjk::MersennePrimes mp;
+
+	mp.SetPrimalityCheck(CheckPrimality);
 
 	for (size_t i = 0; i < Primes.size(); i++)
 	{
-		StartRange = Primes[i] - 1;
-		EndRange = Primes[i];
-		MersennePrimes mp(StartRange, EndRange, CheckPrimality);
+		mp.SetStartRange(Primes[i] - 1);
+		mp.SetEndRange(Primes[i]);
 		mp.GenerateListOfMersennes();
 	}
 
@@ -50,6 +50,7 @@ int main(int argc, char* argv[])
 	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
 	return 0;
 }
+
 
 
 
