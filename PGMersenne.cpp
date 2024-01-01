@@ -33,6 +33,8 @@ namespace pjk
 				return -1;
 			}
 
+		//	this->PGResult = this->PGTransaction.exec_params("select editmersenne($1)", this->MP);
+
 			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
 
 			this->PGTransaction.commit();
