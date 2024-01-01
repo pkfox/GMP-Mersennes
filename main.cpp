@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
 	std::regex primality_regex("-C", std::regex_constants::icase);
 
 	std::vector<std::string> Args(argv + 1, argv + argc);
-	int StartRange;
-	int EndRange;
+	/*int StartRange;
+	int EndRange;*/
 	std::vector<int> Primes;
 	auto beg = std::chrono::high_resolution_clock::now();
 	pjk::PGMersenne pgm;

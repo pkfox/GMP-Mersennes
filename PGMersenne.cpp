@@ -14,12 +14,16 @@ namespace pjk
 	{
 	}
 
-	PGMersenne::PGMersenne(int Mersenne, std::string Result, int Probability) :PGMersenne()
+	PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability) :PGMersenne()
 	{
 		this->Mersenne = Mersenne;
-		this->MersenneResult = Result;
+		this->MersenneResult = MersenneResult;
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
+		
+		this->MP.Mersenne = Mersenne;
+		this->MP.MersenneResult = MersenneResult;
+		this->MP.PrimeProbability = Probability;
 	}
 
 	size_t PGMersenne::EditMersenne()

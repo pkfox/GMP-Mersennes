@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="MersennePrime.h" />
     <ClInclude Include="MersennePrimes.h" />
+    <ClInclude Include="mpconv.h" />
     <ClInclude Include="PGMersenne.h" />
     <ClInclude Include="PrimeStatus.h" />
     <ClInclude Include="Utils.h" />
