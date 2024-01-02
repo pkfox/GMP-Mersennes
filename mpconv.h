@@ -18,12 +18,12 @@ namespace pqxx
 
 	zview string_traits<pjk::MersennePrime>::to_buf(char* begin, char* end, pjk::MersennePrime const& value)
 	{
-		return zview();
+		return zview{value};
 	}
 
 	char* string_traits<pjk::MersennePrime>::into_buf(char* begin, char* end, pjk::MersennePrime const& value)
 	{
-	   return nullptr;
+		return begin;
 	}
 
 	std::size_t string_traits<pjk::MersennePrime>::size_buffer(pjk::MersennePrime const& value) noexcept
@@ -32,6 +32,13 @@ namespace pqxx
 		RetVal += value.MersenneResult.length();
 		RetVal += sizeof(value.PrimeProbability);
 		return RetVal;
+	}
+
+	pjk::MersennePrime from_string(std::string_view text)
+	{
+		pjk::MersennePrime mp;
+		mp.MersenneResult = to_string(text);
+		return mp;
 	}
 }
 #endif
