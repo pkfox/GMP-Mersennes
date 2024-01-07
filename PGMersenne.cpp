@@ -36,10 +36,18 @@ namespace pjk
 				Utils::PrintMessage("Connection is closed");
 				return -1;
 			}
+			
+			std::string sql = "SELECT editmersenne(ROW($1,$2,$3),";
+
+			// sql.erase(std::remove(sql.begin(),sql.end(),'\n'),sql.cend());
+			// const char *p = sql.c_str();
+			//this->PGResult = 
+
+		//	this->PGTransaction.exec_params("SELECT editmersenne($1)",this->MP);
 
 		//  this->PGTransaction.exec_params("select editmersenne($1)", this->MP);
 
-		  this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
+		   this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)", this->Mersenne, this->MersenneResult, this->PrimeProbabilityText);
 
 			this->PGTransaction.commit();
 			RetVal = this->PGResult[0][0].as<size_t>();
