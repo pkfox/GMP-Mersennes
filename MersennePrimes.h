@@ -42,7 +42,7 @@ namespace pjk
 		mpz_t CurrentPrime; // The current prime
 		const unsigned int Probability = 50; // Used by GMP in primality check.
 		unsigned long int StartRange; // Generate mersennes starting at this number.
-		unsigned long int EndRange; // and ends at this
+		unsigned long int EndRange; // and end at this.
 		unsigned long int LoopIndex;
 		void AnnounceRunDetails(); // Brief show of runtime parameters
 		void GetNextPrime(); // Gets next prime

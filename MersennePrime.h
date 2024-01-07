@@ -2,6 +2,7 @@
 #include <pqxx/pqxx>
 #include <rapidjson/document.h>
 #include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>
 #include "PrimeStatus.h"
 
 
@@ -14,7 +15,6 @@ namespace pjk
 		MersennePrime();
 		MersennePrime(int Mersenne, std::string MersenneResult,int PrimeProbability);
 		std::string GetJSON();
-	private:
 		int Mersenne;
 		std::string MersenneResult;
 		int PrimeProbability;

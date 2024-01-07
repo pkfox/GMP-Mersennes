@@ -1,4 +1,5 @@
 #include "MersennePrime.h"
+using namespace rapidjson;
 
 pjk::MersennePrime::MersennePrime():Mersenne(0),MersenneResult(""),PrimeProbability(0),PrimeProbabilityText("")
 {
@@ -15,14 +16,25 @@ pjk::MersennePrime::MersennePrime(int Mersenne, std::string MersenneResult, int 
 
 std::string pjk::MersennePrime::GetJSON()
 {
-    using namespace rapidjson;
+    std::string RetVal;
+    StringBuffer strbuf;
+    Writer<StringBuffer> writer(strbuf);
 
-        StringBuffer strbuf;
-        Writer<StringBuffer> writer(strbuf);
-      
-        writer.String("Mersenne");
-        writer(Mersenne);
-        writer.EndObject();
-        return strbuf.GetString();
+    writer.StartObject();
+    writer.String("Mersenne");
+    writer.Int(this->Mersenne);
+
+    writer.String("MersenneResult");
+    writer.String(this->MersenneResult.c_str());
+
+    writer.String("PrimeProbability");
+    writer.Int(this->PrimeProbability);
+
+    writer.String("PrimeProbabilityText");
+    writer.String(this->PrimeProbabilityText.c_str());
+
+    writer.EndObject();
+    RetVal = strbuf.GetString();
+    return RetVal;
 }
 
