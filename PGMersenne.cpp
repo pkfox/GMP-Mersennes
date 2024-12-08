@@ -59,7 +59,7 @@ namespace pjk
 			return;
 		}
 
-		this->PGTransaction.exec("select getprimes()").for_each([&Primes](int prime) { Primes.push_back(prime); });
+		this->PGTransaction.exec("select getprimes(20)").for_each([&Primes](int prime) { Primes.push_back(prime); });
 		this->PGTransaction.commit();
 	}
 }
