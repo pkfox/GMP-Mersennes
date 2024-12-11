@@ -50,16 +50,16 @@ namespace pjk
 				PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability);
 				this->RetVal = pgm.EditMersenne();
 				std::stringstream ss;
+				
 				ss << "((2^" << this->LoopIndex << ")-1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 				Utils::PrintMessage(ss.str());
 				ss.clear();
 				ss.str("");
-				ss << "Row id " << this->RetVal << " updated";
+				ss << Utils::GetDateTime() << " - Row id " << this->RetVal << " updated";
 				Utils::PrintMessage(ss.str());
 			}
 			this->GetNextPrime();
 		}
-
 	}
 
 	// Returns a vector of ints containing the mersennes.

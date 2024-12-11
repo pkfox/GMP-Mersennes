@@ -8,6 +8,7 @@ class Utils
 {
 public:
 	static void PrintMessage(std::string msg);
+	static std::string GetDateTime();
 };
 #endif
 
