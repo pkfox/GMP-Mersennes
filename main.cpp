@@ -7,14 +7,10 @@
 #include <chrono>
 #include <algorithm>
 #include "Utils.h"
-#include <algorithm>
 #include <regex>
 
-#include <iostream>
 #include <pqxx/pqxx>
 #include <exception>
-#include <new>
-#include <string>
 
 int main(int argc, char* argv[])
 {
@@ -29,8 +25,7 @@ int main(int argc, char* argv[])
 	std::stringstream ss;
 	ss << "Mersenne search will " << (CheckPrimality ? "apply" : "skip") << " the primality test\n";
 	ss << "Do you want to continue Y/N ? ";
-
-	std::cout << ss.str();
+	Utils::PrintMessage(ss.str());
 	std::getline(std::cin, Confirm);
 
 	if (!std::regex_search(Confirm, confirm_regex))
@@ -50,7 +45,11 @@ int main(int argc, char* argv[])
 
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - beg);
-	std::cout << "Elapsed Time: " << duration.count() << " minutes\n";
+	
+	ss.clear();
+	ss.str("");
+	ss << "Elapsed Time: " << duration.count() << " minutes";
+	Utils::PrintMessage(ss.str());
 	return 0;
 }
 

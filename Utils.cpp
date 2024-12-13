@@ -2,15 +2,19 @@
 
 void Utils::PrintMessage(std::string msg)
 {
-	std::cout << msg << "\n";
+	std::cout << GetDateTime() << " " << msg << "\n";
 }
 
 std::string Utils::GetDateTime()
 {
-    time_t now = time(nullptr);
-    // convert now to local time
-    struct tm* local_time = localtime(&now);
-    // convert local_time to string form
-    std::string date_time(asctime(local_time));
-    return date_time;
+    struct tm newtime;
+    __time32_t aclock;
+    char buffer[32];
+    errno_t errNum;
+    _time32(&aclock);   // Get time in seconds.
+    _localtime32_s(&newtime, &aclock);   // Convert time to struct tm form.
+
+    // local time as a string.
+    errNum = asctime_s(buffer, 32, &newtime);
+    return std::string(buffer);
 }
