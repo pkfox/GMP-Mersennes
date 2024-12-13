@@ -86,9 +86,8 @@ namespace pjk
 	void MersennePrimes::AnnounceRunDetails()
 	{
 		std::stringstream ss;
-		ss << "Searching for Mersenne primes ";
-		ss << "for range " << this->StartRange;
-		ss << " -> " << this->EndRange << ".\n";
+		ss << "Searching for Mersenne primes " << "for range " << this->StartRange;
+		ss << " -> " << this->EndRange;
 		Utils::PrintMessage(ss.str());
 	}
 
