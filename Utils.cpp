@@ -1,12 +1,13 @@
 #include "Utils.h"
+
 constexpr auto BUFSIZE = 48;
 
 void Utils::PrintMessage(std::string msg)
 {
-	std::cout << GetDateTime() << " " << msg << "\n";
+    std::cout << GetDateTime() << " " << msg << "\n";
 }
 
-std::string Utils::GetDateTime()
+/*std::string Utils::GetDateTime()
 {
     struct tm newtime;
     __time32_t aclock;
@@ -19,6 +20,17 @@ std::string Utils::GetDateTime()
     errNum = asctime_s(buffer, BUFSIZE, &newtime);
     std::string RetVal(buffer);
     RetVal.pop_back(); // remove line ending.
- 
+
      return RetVal;
 }
+*/
+
+std::string Utils::GetDateTime()
+{
+    time_t now = time(nullptr);
+    struct tm* local_time = localtime(&now);
+    std::string date_time(asctime(local_time));
+    date_time.pop_back();
+    return date_time;
+}
+
