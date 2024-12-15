@@ -54,6 +54,14 @@ namespace pjk
 		std::string PowerValue; // The ((2^P) -1) value of a possible mersenne.
 		// Optional primality check
 		bool CheckPrimality;
+		std::chrono::steady_clock::time_point StartOfCalculation;
+		std::chrono::steady_clock::time_point EndOfCalculation;
+		
+		std::chrono::hours CalculationHours;
+		std::chrono::minutes CalculationMinutes;
+		std::chrono::seconds CalculationSeconds;
+
+		void PrintCalculationDuration();
 	};
 #endif
 }

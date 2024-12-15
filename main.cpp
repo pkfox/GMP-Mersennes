@@ -18,7 +18,6 @@ int main(int argc, char* argv[])
 	std::regex primality_regex("-C", std::regex_constants::icase);
 	std::vector<std::string> Args(argv + 1, argv + argc);
 	std::vector<int> Primes;
-	auto beg = std::chrono::high_resolution_clock::now();
 	pjk::PGMersenne pgm;
 	std::string Confirm;
 	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "", primality_regex);
@@ -42,14 +41,6 @@ int main(int argc, char* argv[])
 		mp.SetEndRange(Primes[i]);
 		mp.GenerateListOfMersennes();
 	}
-
-	auto end = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - beg);
-	
-	ss.clear();
-	ss.str("");
-	ss << "Elapsed Time: " << duration.count() << " minutes";
-	Utils::PrintMessage(ss.str());
 	return 0;
 }
 

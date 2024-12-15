@@ -31,6 +31,7 @@ namespace pjk
 
 		while (this->LoopIndex <= this->EndRange)
 		{
+			this->StartOfCalculation = std::chrono::high_resolution_clock::now();
 			// Raise 2 ^ this->LoopIndex and put the result in this->Pow2Value
 			mpz_ui_pow_ui(this->Pow2Value, this->Two, this->LoopIndex);
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
@@ -55,9 +56,11 @@ namespace pjk
 				Utils::PrintMessage(ss.str());
 				ss.clear();
 				ss.str("");
-				ss << Utils::GetDateTime() << " - Row id " << this->RetVal << " updated";
+				ss << "Row id " << this->RetVal << " updated";
 				Utils::PrintMessage(ss.str());
 			}
+			this->EndOfCalculation = std::chrono::high_resolution_clock::now();
+			this->PrintCalculationDuration();
 			this->GetNextPrime();
 		}
 	}
@@ -98,5 +101,20 @@ namespace pjk
 		// Set this->LoopIndex to the next prime.
 		this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
 	}
+	void MersennePrimes::PrintCalculationDuration()
+	{
+		this->CalculationHours = std::chrono::duration_cast<std::chrono::hours>(this->EndOfCalculation - this->StartOfCalculation);
+		this->CalculationMinutes = std::chrono::duration_cast<std::chrono::minutes>(this->EndOfCalculation - this->StartOfCalculation);
+		this->CalculationSeconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+		
+		std::stringstream ss;
+		ss << "Primality test for " << this->CurrentPrime << " was "
+		<< this->CalculationHours.count() << " "
+		<< Utils::Pluralise("hour", this->CalculationHours.count()) << " "
+		<< this->CalculationMinutes.count() << " "
+		<< Utils::Pluralise("minute", this->CalculationMinutes.count()) << " "
+		<< this->CalculationSeconds.count() << " "
+		<< Utils::Pluralise("second", this->CalculationSeconds.count());
+		Utils::PrintMessage(ss.str());
+	}
 }
-

@@ -9,6 +9,7 @@ class Utils
 public:
 	static void PrintMessage(std::string msg);
 	static std::string GetDateTime();
+	static std::string Pluralise(std::string Word, int Number);
 };
 #endif
 
