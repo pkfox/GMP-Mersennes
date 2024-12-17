@@ -51,7 +51,7 @@ namespace pjk
 				PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability);
 				this->RetVal = pgm.EditMersenne();
 				std::stringstream ss;
-				
+
 				ss << "((2^" << this->LoopIndex << ")-1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 				Utils::PrintMessage(ss.str());
 				ss.clear();
@@ -106,16 +106,28 @@ namespace pjk
 	{
 		std::stringstream ss;
 
-		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+		std::chrono::seconds Seconds =
+		std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 
 		std::chrono::hh_mm_ss Elapsedtime(Seconds);
-
-		ss  << Elapsedtime.hours().count() << " hours " << Elapsedtime.minutes().count()
-			<< " minutes " << Elapsedtime.seconds().count() << " seconds.";
+		ss << "Primality validation for " << this->CurrentPrime << " took ";
 		
+		if (Elapsedtime.hours().count() > 0)
+		{
+			ss << Elapsedtime.hours().count() << " hours ";
+		}
+
+		if (Elapsedtime.minutes().count() > 0)
+		{
+			ss << Elapsedtime.minutes().count() << " minutes ";
+		}
+
+		if (Elapsedtime.seconds().count() > 0)
+		{
+			ss << Elapsedtime.seconds().count() << " seconds";
+		}
+
 		Utils::PrintMessage(ss.str());
 	}
+
 }
-//std::chrono::hh_mm_ss time(std::chrono::duration_cast<std::chrono::seconds>
-// (this->EndOfCalculation - this->StartOfCalculation));
-// << Seconds << " seconds is equivalent to "
