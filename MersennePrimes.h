@@ -44,11 +44,11 @@ namespace pjk
 		unsigned long int StartRange; // Generate mersennes starting at this number.
 		unsigned long int EndRange; // and end at this.
 		unsigned long int LoopIndex;
-		void AnnounceRunDetails(); // Brief show of runtime parameters
+		void AnnounceRunDetails(); // Concise show of runtime parameters
 		void GetNextPrime(); // Gets next prime
 		bool isPrime = false; // True if normal prime
 		bool isMersennePrime = false; // True if mersenne prime
-		unsigned int PrimeProbability = 0;// Return value from GMP primality function
+		unsigned int PrimeProbability = 0;// Return value from GMP primality validation function
 		std::size_t RetVal = 0; // Return value from database function
 		std::vector<int> MPrimes; // The Mersenne primes
 		std::string PowerValue; // The ((2^P) -1) value of a possible mersenne.

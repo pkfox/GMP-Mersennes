@@ -103,18 +103,13 @@ namespace pjk
 	}
 	void MersennePrimes::PrintCalculationDuration()
 	{
-		this->CalculationHours = std::chrono::duration_cast<std::chrono::hours>(this->EndOfCalculation - this->StartOfCalculation);
-		this->CalculationMinutes = std::chrono::duration_cast<std::chrono::minutes>(this->EndOfCalculation - this->StartOfCalculation);
-		this->CalculationSeconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-		
+		std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+
 		std::stringstream ss;
-		ss << "Primality test for " << this->CurrentPrime << " was "
-		<< this->CalculationHours.count() << " "
-		<< Utils::Pluralise("hour", this->CalculationHours.count()) << " "
-		<< this->CalculationMinutes.count() << " "
-		<< Utils::Pluralise("minute", this->CalculationMinutes.count()) << " "
-		<< this->CalculationSeconds.count() << " "
-		<< Utils::Pluralise("second", this->CalculationSeconds.count());
+		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+		std::chrono::seconds Minutes = Seconds / 60;
+		std::chrono::seconds Hours = Seconds / (60*60);
+
 		Utils::PrintMessage(ss.str());
 	}
 }
