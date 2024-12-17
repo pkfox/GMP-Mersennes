@@ -110,10 +110,12 @@ namespace pjk
 
 		std::chrono::hh_mm_ss Elapsedtime(Seconds);
 
-		std::chrono::hh_mm_ss time(std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation));
-		ss << Seconds << " seconds is equivalent to " << Elapsedtime.hours().count() << " hours " << Elapsedtime.minutes().count()
+		ss  << Elapsedtime.hours().count() << " hours " << Elapsedtime.minutes().count()
 			<< " minutes " << Elapsedtime.seconds().count() << " seconds.";
 		
 		Utils::PrintMessage(ss.str());
 	}
 }
+//std::chrono::hh_mm_ss time(std::chrono::duration_cast<std::chrono::seconds>
+// (this->EndOfCalculation - this->StartOfCalculation));
+// << Seconds << " seconds is equivalent to "
