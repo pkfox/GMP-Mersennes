@@ -101,15 +101,19 @@ namespace pjk
 		// Set this->LoopIndex to the next prime.
 		this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
 	}
+
 	void MersennePrimes::PrintCalculationDuration()
 	{
-		std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-
 		std::stringstream ss;
-		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-		std::chrono::seconds Minutes = Seconds / 60;
-		std::chrono::seconds Hours = Seconds / (60*60);
 
+		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+
+		std::chrono::hh_mm_ss Elapsedtime(Seconds);
+
+		std::chrono::hh_mm_ss time(std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation));
+		ss << Seconds << " seconds is equivalent to " << Elapsedtime.hours().count() << " hours " << Elapsedtime.minutes().count()
+			<< " minutes " << Elapsedtime.seconds().count() << " seconds.";
+		
 		Utils::PrintMessage(ss.str());
 	}
 }
