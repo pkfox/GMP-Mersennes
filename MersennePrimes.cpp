@@ -31,7 +31,7 @@ namespace pjk
 
 		while (this->LoopIndex <= this->EndRange)
 		{
-			this->StartOfCalculation = std::chrono::high_resolution_clock::now();
+			this->StartOfCalculation = std::chrono::steady_clock::now();
 			// Raise 2 ^ this->LoopIndex and put the result in this->Pow2Value
 			mpz_ui_pow_ui(this->Pow2Value, this->Two, this->LoopIndex);
 			// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
@@ -59,7 +59,7 @@ namespace pjk
 				ss << "Row id " << this->RetVal << " updated";
 				Utils::PrintMessage(ss.str());
 			}
-			this->EndOfCalculation = std::chrono::high_resolution_clock::now();
+			this->EndOfCalculation = std::chrono::steady_clock::now();
 			this->PrintCalculationDuration();
 			this->GetNextPrime();
 		}
