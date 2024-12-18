@@ -17,7 +17,7 @@ namespace pjk
 		PGMersenne(PGMersenne& mp);
 		PGMersenne();
 		PGMersenne(int Mersenne, std::string MersenneResult, int Probability);
-		//[[nodiscard]]
+		[[nodiscard]]
 		std::size_t EditMersenne();
 		void GetData(std::vector<int>& Primes);
 	private:

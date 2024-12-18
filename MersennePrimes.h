@@ -49,7 +49,7 @@ namespace pjk
 		bool isPrime = false; // True if normal prime
 		bool isMersennePrime = false; // True if mersenne prime
 		unsigned int PrimeProbability = 0;// Return value from GMP primality validation function
-		std::size_t RetVal = 0; // Return value from database function
+		std::size_t RetVal = 0; // Return value from database update function
 		std::vector<int> MPrimes; // The Mersenne primes
 		std::string PowerValue; // The ((2^P) -1) value of a possible mersenne.
 		// Optional primality check
