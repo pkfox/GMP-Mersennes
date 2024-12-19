@@ -21,6 +21,7 @@ namespace pjk
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 		this->Duration = Duration;
+//                std::cout << "Duration in PGMersenne is " << this->Duration << "\n";
 		this->MP.Mersenne = Mersenne;
 		this->MP.MersenneResult = MersenneResult;
 		this->MP.PrimeProbability = Probability;
@@ -37,8 +38,13 @@ namespace pjk
 				Utils::PrintMessage("Connection is closed");
 				return -1;
 			}
-			
-			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4)",this->Mersenne,this->MersenneResult,this->Duration,this->PrimeProbabilityText);
+ 
+                        this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4)",
+                        this->Mersenne,
+                        this->MersenneResult,
+                        this->PrimeProbabilityText,
+                        this->Duration);
+
 			std::string json = this->MP.GetJSON();
 			this->PGTransaction.commit();
 			RetVal = this->PGResult[0][0].as<size_t>();

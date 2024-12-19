@@ -48,20 +48,18 @@ namespace pjk
 			{
 				this->MPrimes.push_back(this->LoopIndex);
 				this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-				
 				std::stringstream ss;
-
 				ss << "((2^" << this->LoopIndex << ")-1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 				Utils::PrintMessage(ss.str());
 				ss.clear();
 				ss.str("");
-				ss << "Row id " << this->RetVal << " updated";
-				Utils::PrintMessage(ss.str());
+                                this->EndOfCalculation = std::chrono::steady_clock::now();
+			        this->PrintCalculationDuration();
+			        PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
+			        this->RetVal = pgm.EditMersenne();
+                                ss << "Row id " << this->RetVal << " updated";
+                                Utils::PrintMessage(ss.str());
 			}
-			this->EndOfCalculation = std::chrono::steady_clock::now();
-			this->PrintCalculationDuration();
-			PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
-			this->RetVal = pgm.EditMersenne();
 			this->GetNextPrime();
 		}
 	}
@@ -111,8 +109,7 @@ namespace pjk
 		std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 
 		std::chrono::hh_mm_ss Elapsedtime(Seconds);
-		ss << "Primality validation for " << this->CurrentPrime << " took ";
-		
+
 		if (Elapsedtime.hours().count() > 0)
 		{
 			ss << Elapsedtime.hours().count() << " hours ";
@@ -127,8 +124,11 @@ namespace pjk
 		{
 			ss << Elapsedtime.seconds().count() << " seconds";
 		}
-		this->Duration = ss.str();
-		Utils::PrintMessage(ss.str());
-	}
 
+                // Early calculations are very rapid so we give a default value for the database update.
+                if (ss.str().empty())
+                   this->Duration = "0 seconds";
+                else
+                    this->Duration = ss.str();
+	}
 }
