@@ -21,7 +21,6 @@ namespace pjk
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 		this->Duration = Duration;
-//                std::cout << "Duration in PGMersenne is " << this->Duration << "\n";
 		this->MP.Mersenne = Mersenne;
 		this->MP.MersenneResult = MersenneResult;
 		this->MP.PrimeProbability = Probability;
@@ -64,6 +63,8 @@ namespace pjk
 			Utils::PrintMessage("Connection is closed");
 			return;
 		}
+		
+		this->PGTransaction.exec("select resetprimalitytables()");
 
 		this->PGTransaction.exec_params("select getprimes()")
 		.for_each([&Primes](int prime) { Primes.push_back(prime); });

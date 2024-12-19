@@ -53,12 +53,13 @@ namespace pjk
 				Utils::PrintMessage(ss.str());
 				ss.clear();
 				ss.str("");
-                                this->EndOfCalculation = std::chrono::steady_clock::now();
-			        this->PrintCalculationDuration();
-			        PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
-			        this->RetVal = pgm.EditMersenne();
-                                ss << "Row id " << this->RetVal << " updated";
-                                Utils::PrintMessage(ss.str());
+
+                this->EndOfCalculation = std::chrono::steady_clock::now();
+			    this->CalculateDuration();
+			    PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
+		        this->RetVal = pgm.EditMersenne();
+                ss << "Row id " << this->RetVal << " updated";
+                Utils::PrintMessage(ss.str());
 			}
 			this->GetNextPrime();
 		}
@@ -101,12 +102,11 @@ namespace pjk
 		this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
 	}
 
-	void MersennePrimes::PrintCalculationDuration()
+	void MersennePrimes::CalculateDuration()
 	{
 		std::stringstream ss;
 
-		std::chrono::seconds Seconds =
-		std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 
 		std::chrono::hh_mm_ss Elapsedtime(Seconds);
 
@@ -125,10 +125,11 @@ namespace pjk
 			ss << Elapsedtime.seconds().count() << " seconds";
 		}
 
-                // Early calculations are very rapid so we give a default value for the database update.
-                if (ss.str().empty())
-                   this->Duration = "0 seconds";
-                else
-                    this->Duration = ss.str();
+        // Early calculations are very rapid so we give a default value for the database update.
+        this->Duration = ss.str().empty() ? "0 seconds" : ss.str();
+		ss.clear();
+		ss.str("");
+		ss << "Duration for " << this->CurrentPrime << " was " << this->Duration;
+		Utils::PrintMessage(ss.str());
 	}
 }
