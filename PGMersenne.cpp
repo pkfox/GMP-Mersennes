@@ -14,13 +14,13 @@ namespace pjk
 	{
 	}
 
-	PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability) :PGMersenne()
+	PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability,std::string Duration) :PGMersenne()
 	{
 		this->Mersenne = Mersenne;
 		this->MersenneResult = MersenneResult;
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
-		
+		this->Duration = Duration;
 		this->MP.Mersenne = Mersenne;
 		this->MP.MersenneResult = MersenneResult;
 		this->MP.PrimeProbability = Probability;
@@ -38,7 +38,7 @@ namespace pjk
 				return -1;
 			}
 			
-			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3)",this->Mersenne,this->MersenneResult,this->PrimeProbabilityText);
+			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4)",this->Mersenne,this->MersenneResult,this->Duration,this->PrimeProbabilityText);
 			std::string json = this->MP.GetJSON();
 			this->PGTransaction.commit();
 			RetVal = this->PGResult[0][0].as<size_t>();

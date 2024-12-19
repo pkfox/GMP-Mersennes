@@ -48,8 +48,7 @@ namespace pjk
 			{
 				this->MPrimes.push_back(this->LoopIndex);
 				this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-				PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability);
-				this->RetVal = pgm.EditMersenne();
+				
 				std::stringstream ss;
 
 				ss << "((2^" << this->LoopIndex << ")-1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
@@ -61,6 +60,8 @@ namespace pjk
 			}
 			this->EndOfCalculation = std::chrono::steady_clock::now();
 			this->PrintCalculationDuration();
+			PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
+			this->RetVal = pgm.EditMersenne();
 			this->GetNextPrime();
 		}
 	}
@@ -126,7 +127,7 @@ namespace pjk
 		{
 			ss << Elapsedtime.seconds().count() << " seconds";
 		}
-
+		this->Duration = ss.str();
 		Utils::PrintMessage(ss.str());
 	}
 
