@@ -38,11 +38,12 @@ namespace pjk
 				return -1;
 			}
  
-                        this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4)",
-                        this->Mersenne,
-                        this->MersenneResult,
-                        this->PrimeProbabilityText,
-                        this->Duration);
+                        
+			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
+            this->Mersenne,
+            this->MersenneResult,
+            this->PrimeProbabilityText,
+            this->Duration);
 
 			std::string json = this->MP.GetJSON();
 			this->PGTransaction.commit();
