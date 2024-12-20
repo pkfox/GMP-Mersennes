@@ -63,9 +63,8 @@ namespace pjk
 			Utils::PrintMessage("Connection is closed");
 			return;
 		}
-		
-		this->PGTransaction.exec("select resetprimalitytables()");
 
+		this->PGTransaction.exec("select resetprimalitytables()");
 		this->PGTransaction.exec_params("select getprimes()")
 		.for_each([&Primes](int prime) { Primes.push_back(prime); });
 		this->PGTransaction.commit();
