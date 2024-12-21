@@ -109,27 +109,12 @@ namespace pjk
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 
 		std::chrono::hh_mm_ss Elapsedtime(Seconds);
-
-		if (Elapsedtime.hours().count() > 0)
-		{
-			ss << Elapsedtime.hours().count() << " hour";
-		}
-
-		if (Elapsedtime.minutes().count() > 0)
-		{
-			ss << Elapsedtime.minutes().count() << " minute";
-		}
-
-		if (Elapsedtime.seconds().count() > 0)
-		{
-			ss << Elapsedtime.seconds().count() << " second";
-		}
-
-        // Early calculations are very rapid so we give a default value for the database update.
-        this->Duration = ss.str().empty() ? "1 second" : ss.str();
-		ss.clear();
+		ss << Elapsedtime;
+		this->Duration = ss.str();
+		ss.str().clear();
 		ss.str("");
-		ss << "Duration for " << this->CurrentPrime << " was " << this->Duration;
+
+		ss << "Primality Calculation for " << this->CurrentPrime << " took " << Elapsedtime;
 		Utils::PrintMessage(ss.str());
 	}
 }

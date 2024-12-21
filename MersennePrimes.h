@@ -58,6 +58,7 @@ namespace pjk
 		// Used in elapsed time calculation.
 		std::chrono::steady_clock::time_point StartOfCalculation;
 		std::chrono::steady_clock::time_point EndOfCalculation;
+		//std::chrono::hh_mm_ss Elapsedtime(this->End
 		std::string Duration;
 		void CalculateDuration();
 	};
