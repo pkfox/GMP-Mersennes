@@ -112,21 +112,21 @@ namespace pjk
 
 		if (Elapsedtime.hours().count() > 0)
 		{
-			ss << Elapsedtime.hours().count() << " hours ";
+			ss << Elapsedtime.hours().count() << " hour";
 		}
 
 		if (Elapsedtime.minutes().count() > 0)
 		{
-			ss << Elapsedtime.minutes().count() << " minutes ";
+			ss << Elapsedtime.minutes().count() << " minute";
 		}
 
 		if (Elapsedtime.seconds().count() > 0)
 		{
-			ss << Elapsedtime.seconds().count() << " seconds";
+			ss << Elapsedtime.seconds().count() << " second";
 		}
 
         // Early calculations are very rapid so we give a default value for the database update.
-        this->Duration = ss.str().empty() ? "0 seconds" : ss.str();
+        this->Duration = ss.str().empty() ? "1 second" : ss.str();
 		ss.clear();
 		ss.str("");
 		ss << "Duration for " << this->CurrentPrime << " was " << this->Duration;
