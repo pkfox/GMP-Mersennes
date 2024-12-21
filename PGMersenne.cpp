@@ -2,14 +2,6 @@
 
 namespace pjk
 {
-	PGMersenne::PGMersenne(PGMersenne& mp)
-	{
-		this->Mersenne = mp.Mersenne;
-		this->MersenneResult = mp.MersenneResult;
-		this->Probability = mp.Probability;
-		this->PrimeProbabilityText = mp.PrimeProbabilityText;
-	}
-
 	PGMersenne::PGMersenne() :PrimeProbabilityText(""), MersenneResult(""), Mersenne(0), Probability(0)
 	{
 	}
@@ -21,10 +13,6 @@ namespace pjk
 		this->Probability = Probability;
 		this->PrimeProbabilityText = PrimeStatus::GetStatus(Probability);
 		this->Duration = Duration;
-		this->MP.Mersenne = Mersenne;
-		this->MP.MersenneResult = MersenneResult;
-		this->MP.PrimeProbability = Probability;
-		this->MP.PrimeProbabilityText = this->PrimeProbabilityText;
 	}
 
 	size_t PGMersenne::EditMersenne()

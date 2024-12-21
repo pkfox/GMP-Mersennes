@@ -14,7 +14,6 @@ namespace pjk
 	class PGMersenne
 	{
 	public:
-		PGMersenne(PGMersenne& mp);
 		PGMersenne();
 		PGMersenne(int Mersenne, std::string MersenneResult, int Probability,std::string Duration);
 		[[nodiscard]]
@@ -32,6 +31,5 @@ namespace pjk
 		pqxx::work PGTransaction = pqxx::work(PGConnection);
 		pqxx::result PGResult;
 	};
-
 #endif
 }
