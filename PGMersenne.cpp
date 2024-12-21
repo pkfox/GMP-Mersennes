@@ -25,15 +25,12 @@ namespace pjk
 				Utils::PrintMessage("Connection is closed");
 				return -1;
 			}
- 
-                        
+
 			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
             this->Mersenne,
             this->MersenneResult,
             this->PrimeProbabilityText,
             this->Duration);
-
-			std::string json = this->MP.GetJSON();
 			this->PGTransaction.commit();
 			RetVal = this->PGResult[0][0].as<size_t>();
 			return RetVal;

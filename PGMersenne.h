@@ -20,7 +20,6 @@ namespace pjk
 		std::size_t EditMersenne();
 		void GetData(std::vector<int>& Primes);
 	private:
-		MersennePrime MP;
 		int Mersenne;
 		std::string MersenneResult;
 		int Probability;
