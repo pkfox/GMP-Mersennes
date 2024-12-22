@@ -2,7 +2,7 @@
 
 namespace pjk
 {
-	MersennePrimes::MersennePrimes()
+	MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0)
 	{
 		mpz_init_set_ui(this->One, 1);
 		mpz_init_set_ui(this->Pow2Value, 0);
@@ -54,12 +54,12 @@ namespace pjk
 				ss.clear();
 				ss.str("");
 
-                this->EndOfCalculation = std::chrono::steady_clock::now();
-			    this->CalculateDuration();
-			    PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability,this->Duration);
-		        this->RetVal = pgm.EditMersenne();
-                ss << "Row id " << this->RetVal << " updated";
-                Utils::PrintMessage(ss.str());
+				this->EndOfCalculation = std::chrono::steady_clock::now();
+				this->CalculateDuration();
+				PGMersenne pgm(this->LoopIndex, this->PowerValue, this->PrimeProbability, this->Duration);
+				this->RetVal = pgm.EditMersenne();
+				ss << "Row id " << this->RetVal << " updated";
+				Utils::PrintMessage(ss.str());
 			}
 			this->GetNextPrime();
 		}
@@ -105,16 +105,14 @@ namespace pjk
 	void MersennePrimes::CalculateDuration()
 	{
 		std::stringstream ss;
-
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-
-		std::chrono::hh_mm_ss Elapsedtime(Seconds);
-		ss << Elapsedtime;
+		this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
+	
+		ss << this->Elapsedtime.to_duration();
 		this->Duration = ss.str();
 		ss.str().clear();
 		ss.str("");
-
-		ss << "Primality Calculation for " << this->CurrentPrime << " took " << Elapsedtime;
+		ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
 		Utils::PrintMessage(ss.str());
 	}
 }

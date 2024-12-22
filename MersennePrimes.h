@@ -39,7 +39,7 @@ namespace pjk
 		const unsigned int Two = 2; // Used for exponential calculation.
 		mpz_t Pow2Value; // Initial pow2 value. 
 		mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
-		mpz_t CurrentPrime; // The current prime
+		mpz_t CurrentPrime; // The current prime in the loop.
 		const unsigned int Probability = 50; // Used by GMP in primality check.
 		unsigned long int StartRange; // Generate mersennes starting at this number.
 		unsigned long int EndRange; // and end at this.
@@ -58,7 +58,7 @@ namespace pjk
 		// Used in elapsed time calculation.
 		std::chrono::steady_clock::time_point StartOfCalculation;
 		std::chrono::steady_clock::time_point EndOfCalculation;
-		//std::chrono::hh_mm_ss Elapsedtime(this->End
+		std::chrono::hh_mm_ss<std::chrono::seconds> Elapsedtime;
 		std::string Duration;
 		void CalculateDuration();
 	};
