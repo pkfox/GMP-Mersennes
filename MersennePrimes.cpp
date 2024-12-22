@@ -108,7 +108,15 @@ namespace pjk
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 		this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
 	
-		ss << this->Elapsedtime.to_duration();
+//		if (Seconds.count() > 60)
+//			Utils::PrintMessage("We have minutes...");
+	
+		#ifdef WIN32
+			ss << this->Elapsedtime;
+		#else
+			ss << this->Elapsedtime.to_duration();
+		#endif // WIN32
+				
 		this->Duration = ss.str();
 		ss.str().clear();
 		ss.str("");
