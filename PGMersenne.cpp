@@ -25,15 +25,20 @@ namespace pjk
 				Utils::PrintMessage("Connection is closed");
 				return -1;
 			}
-
-			this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
+/*
+Postgres function has these mandatory parameters
+p_mersenne integer,
+p_mersenneresult text, 
+p_mersenneprobability mersenneprobability, 
+p_interval interval*/
+            this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
             this->Mersenne,
             this->MersenneResult,
             this->PrimeProbabilityText,
             this->Duration);
-			this->PGTransaction.commit();
-			RetVal = this->PGResult[0][0].as<size_t>();
-			return RetVal;
+	    this->PGTransaction.commit();
+	    RetVal = this->PGResult[0][0].as<size_t>();
+	    return RetVal;
 		}
 		catch (std::exception const& ex)
 		{
