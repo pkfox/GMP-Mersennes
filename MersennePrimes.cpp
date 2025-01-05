@@ -104,18 +104,17 @@ namespace pjk
 
 	void MersennePrimes::CalculateDuration()
 	{
+		std::chrono::hh_mm_ss hms(this->EndOfCalculation - this->StartOfCalculation);
+		
 		std::stringstream ss;
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 		this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
-	
-//		if (Seconds.count() > 60)
-//			Utils::PrintMessage("We have minutes...");
-	
-		#ifdef WIN32
-			ss << this->Elapsedtime;
-		#else
-			ss << this->Elapsedtime.to_duration();
-		#endif // WIN32
+
+	//	#ifdef WIN32
+		//ss << hms.to_duration();
+		//#else
+		ss << this->Elapsedtime;
+		//#endif // WIN32
 				
 		this->Duration = ss.str();
 		ss.str().clear();
