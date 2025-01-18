@@ -59,7 +59,6 @@ namespace pjk
 		std::chrono::steady_clock::time_point StartOfCalculation;
 		std::chrono::steady_clock::time_point EndOfCalculation;
 		std::chrono::hh_mm_ss<std::chrono::seconds> Elapsedtime;
-		//std::chrono::hh_mm_ss<std::chrono::steady_clock::time_point> hms;
 		std::string Duration;
 		void CalculateDuration();
 	};
