@@ -34,19 +34,18 @@ p_interval interval
 Pete Kane
 04-01-2025
 */
-		this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
+        this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
         this->Mersenne,
         this->MersenneResult,
         this->PrimeProbabilityText,
         this->Duration);
-	    this->PGTransaction.commit();
-	    RetVal = this->PGResult[0][0].as<size_t>();
-	    return RetVal;
-
-		}
+	this->PGTransaction.commit();
+	RetVal = this->PGResult[0][0].as<size_t>();
+	return RetVal;
+        }
 		catch (std::exception const& ex)
 		{
-			std::cout << ex.what();
+		    std::cout << ex.what();
 		}
 		return 0;
 	}
@@ -59,7 +58,10 @@ Pete Kane
 			return;
 		}
 
-	//	this->PGTransaction.exec("select resetprimalitytables()");
+                Utils::PrintMessage("Resetting mersenne tables");
+		this->PGTransaction.exec("select resetprimalitytables()");
+ 
+                Utils::PrintMessage("Retrieving Primes");
 		this->PGTransaction.exec_params("select getprimes()")
 		.for_each([&Primes](int prime) { Primes.push_back(prime); });
 		this->PGTransaction.commit();

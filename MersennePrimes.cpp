@@ -110,15 +110,9 @@ namespace pjk
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 		this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
 
-		#ifdef _WIN32
-			ss << hms.hours().count() << "hours " << hms.minutes().count() << "minutes " << hms.seconds().count() << "seconds";
-		#else
-			ss << this->Elapsedtime.to_duration();
-		#endif
-
+		ss << hms.hours().count() << "hour " << hms.minutes().count() << "minute " << hms.seconds().count() << "second";
 		this->Duration = ss.str();
 
-	//	ss.str().clear();
 		ss.str("");
 
 		ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
