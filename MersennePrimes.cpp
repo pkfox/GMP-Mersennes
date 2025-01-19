@@ -65,7 +65,7 @@ namespace pjk
 		}
 	}
 
-	// Returns a vector of ints containing the mersennes.
+	// Returns a vector of ints containing the primes.
 	std::vector<int> MersennePrimes::GetMPrimes()
 	{
 		return this->MPrimes;
@@ -110,14 +110,15 @@ namespace pjk
 		std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 		this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
 
-		#ifdef WIN32
-			ss << this->Elapsedtime;
+		#ifdef _WIN32
+			ss << hms.hours().count() << "hours " << hms.minutes().count() << "minutes " << hms.seconds().count() << "seconds";
 		#else
 			ss << this->Elapsedtime.to_duration();
 		#endif
 
 		this->Duration = ss.str();
-		ss.str().clear();
+
+	//	ss.str().clear();
 		ss.str("");
 
 		ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
