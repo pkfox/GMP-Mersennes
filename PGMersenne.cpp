@@ -34,11 +34,12 @@ p_interval interval
 Pete Kane
 04-01-2025
 */
-        this->PGResult = this->PGTransaction.exec_params("select editmersenne($1,$2,$3,$4::interval)",
-        this->Mersenne,
-        this->MersenneResult,
-        this->PrimeProbabilityText,
-        this->Duration);
+	pqxx::params Params(this->Mersenne);
+        Params.append(this->MersenneResult);
+        Params.append(this->PrimeProbabilityText);
+        Params.append(this->Duration);
+        this->PGResult = this->PGTransaction.exec("select editmersenne($1,$2,$3,$4::interval)",Params);
+
 	this->PGTransaction.commit();
 	RetVal = this->PGResult[0][0].as<size_t>();
 	return RetVal;
@@ -58,11 +59,11 @@ Pete Kane
 			return;
 		}
 
-                Utils::PrintMessage("Resetting mersenne tables");
-		this->PGTransaction.exec("select resetprimalitytables()");
+                Utils::PrintMessage("Resetting mersenne data");
+		this->PGTransaction.exec("select resetmersennedata()");
  
                 Utils::PrintMessage("Retrieving Primes");
-		this->PGTransaction.exec_params("select getprimes()")
+		this->PGTransaction.exec("select getprimes()")
 		.for_each([&Primes](int prime) { Primes.push_back(prime); });
 		this->PGTransaction.commit();
 	}
