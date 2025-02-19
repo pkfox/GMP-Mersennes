@@ -1,7 +1,7 @@
 SRCS = $(wildcard Ex*.cpp)
 LIBS = -lpqxx -lpq
  
-CXXFLAGS = -std=c++20
+CXXFLAGS = -std=c++20 -Wno-deprecated-copy
 
 example:$(SRCS) clean
 	$(CXX) $(CXXFLAGS) $(SRCS) $(LIBS) -o $@
