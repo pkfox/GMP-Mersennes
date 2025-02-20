@@ -1,7 +1,5 @@
 #include "PrimeStatus.h"
 
-namespace pjk
-{
 	std::string PrimeStatus::GetStatus(int PrimeProbability)
 	{
 		std::string RetVal;
@@ -34,4 +32,3 @@ namespace pjk
 		}
 		file.close();
 	}
-}

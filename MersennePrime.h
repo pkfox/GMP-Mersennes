@@ -5,20 +5,17 @@
 #include <rapidjson/writer.h>
 #include "PrimeStatus.h"
 
-
-namespace pjk
+// Storage class for a Mersenne prime
+class MersennePrime
 {
-	// Storage class for a Mersenne prime
-	class MersennePrime
-	{
-	public:
-		MersennePrime();
-		MersennePrime(int Mersenne, std::string MersenneResult,int PrimeProbability);
-		std::string GetJSON();
-		int Mersenne;
-		std::string MersenneResult;
-		int PrimeProbability;
-		std::string PrimeProbabilityText;
-	};
-}
+public:
+	MersennePrime();
+	MersennePrime(int Mersenne, std::string MersenneResult, int PrimeProbability);
+	std::string GetJSON();
+	int Mersenne;
+	std::string MersenneResult;
+	int PrimeProbability;
+	std::string PrimeProbabilityText;
+};
+
 

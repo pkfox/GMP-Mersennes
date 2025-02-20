@@ -1,11 +1,11 @@
 #include "MersennePrime.h"
 
-pjk::MersennePrime::MersennePrime():Mersenne(0),MersenneResult(""),PrimeProbability(0),PrimeProbabilityText("")
+MersennePrime::MersennePrime():Mersenne(0),MersenneResult(""),PrimeProbability(0),PrimeProbabilityText("")
 {
 
 }
 
-pjk::MersennePrime::MersennePrime(int Mersenne, std::string MersenneResult, int PrimeProbability):MersennePrime()
+MersennePrime::MersennePrime(int Mersenne, std::string MersenneResult, int PrimeProbability):MersennePrime()
 {
 	this->Mersenne = Mersenne;
 	this->MersenneResult = MersenneResult;
@@ -13,7 +13,7 @@ pjk::MersennePrime::MersennePrime(int Mersenne, std::string MersenneResult, int 
 	this->PrimeProbabilityText = PrimeStatus::GetStatusMessage(this->PrimeProbability);
 }
 
-std::string pjk::MersennePrime::GetJSON()
+std::string MersennePrime::GetJSON()
 {
     std::string RetVal;
     rapidjson::StringBuffer strbuf;

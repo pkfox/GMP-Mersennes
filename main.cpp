@@ -14,11 +14,13 @@
 
 int main(int argc, char* argv[])
 {
+	std::cout << "libpqxx version: " << PQXX_VERSION << std::endl;
+
 	std::regex confirm_regex("Y", std::regex_constants::icase);
 	std::regex primality_regex("-C", std::regex_constants::icase);
 	std::vector<std::string> Args(argv + 1, argv + argc);
 	std::vector<int> Primes;
-	pjk::PGMersenne pgm;
+	PGMersenne pgm;
 	std::string Confirm;
 	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "", primality_regex);
 	std::stringstream ss;
@@ -31,7 +33,7 @@ int main(int argc, char* argv[])
 		return -1;
 
 	pgm.GetData(Primes);
-	pjk::MersennePrimes mp;
+	MersennePrimes mp;
 
 	mp.SetPrimalityCheck(CheckPrimality);
 	

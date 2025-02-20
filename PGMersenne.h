@@ -9,8 +9,7 @@
 #include "Utils.h"
 #include "MersennePrime.h"
 
-namespace pjk
-{
+
 	class PGMersenne
 	{
 	public:
@@ -29,6 +28,7 @@ namespace pjk
 		pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
 		pqxx::work PGTransaction = pqxx::work(PGConnection);
 		pqxx::result PGResult;
+		pqxx::params Params;
 	};
 #endif
-}
+
