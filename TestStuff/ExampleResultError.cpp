@@ -18,17 +18,16 @@ int main()
 	Params.append(PrimeProbabilityText);
 	Params.append(Duration);
 
-        pqxx::connection c("host=beelink port=5432 dbname=commands user=postgres password=Giraffes09");
-        pqxx::work w(c);
+    pqxx::connection c("host=beelink port=5432 dbname=commands user=postgres password=Giraffes09");
+    pqxx::work w(c);
 
 	pqxx::result PGResult = w.exec("select editmersenne($1,$2,$3,$4)",Params);
-
-        int RetVal = PGResult[0][0].as<int>();
+    int RetVal = PGResult[0][0].as<int>();
 	std:: cout << "Result is " << RetVal << "\n";
 
 
-        w.exec("select getprimes()").for_each([] (int prime) { AddPrime(prime); });
-        std::cout << Primes.size() << " primes returned from database\n";
+    w.exec("select getprimes()").for_each([] (int prime) { AddPrime(prime); });
+    std::cout << Primes.size() << " primes returned from database\n";
 	w.commit();
     }
     catch (const std::exception& e)

@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 	pjk::MersennePrimes mp;
 
 	mp.SetPrimalityCheck(CheckPrimality);
-
+	
 	for (size_t i = 0; i < Primes.size(); i++)
 	{
 		mp.SetStartRange(Primes[i] - 1);

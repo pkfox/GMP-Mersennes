@@ -33,7 +33,10 @@
     <ClCompile Include="MersennePrime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyStringstream.cpp">
+    <ClCompile Include="TestStuff\ExampleResultError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestStuff\version.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MersennePrime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MyStringstream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
