@@ -1,6 +1,7 @@
 #include <iostream>
 #include <pqxx/pqxx>
 #include <vector>
+#include "MersennePrime.h"
 
 static std::vector<int> Primes;
 static void AddPrime(int prime);
@@ -11,8 +12,10 @@ int main()
     {
 	int Mersenne(2);
 	std::string MersenneResult("3");
+	int PrimeProbability(1);
 	std::string PrimeProbabilityText("Possibly a Mersenne prime");
-	std::string Duration("1hour 1minute 100seconds");
+	std::string Duration("1H 100S");
+
 	pqxx::params Params(Mersenne);
 	Params.append(MersenneResult);
 	Params.append(PrimeProbabilityText);
@@ -21,7 +24,8 @@ int main()
         pqxx::connection c("host=beelink port=5432 dbname=commands user=postgres password=Giraffes09");
         pqxx::work w(c);
 
-	pqxx::result PGResult = w.exec("select editmersenne($1,$2,$3,$4)",Params);
+	pqxx::result PGResult = 
+	w.exec("select editmersenne($1,$2,$3,$4)",Params);
 
         int RetVal = PGResult[0][0].as<int>();
 	std:: cout << "Result is " << RetVal << "\n";

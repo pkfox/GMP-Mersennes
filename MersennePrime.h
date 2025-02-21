@@ -6,19 +6,23 @@
 #include "PrimeStatus.h"
 
 
-namespace pjk
-{
+//namespace pjk
+//{
 	// Storage class for a Mersenne prime
 	class MersennePrime
 	{
 	public:
 		MersennePrime();
-		MersennePrime(int Mersenne, std::string MersenneResult,int PrimeProbability);
+		MersennePrime(int Mersenne,
+		std::string MersenneResult,
+		int PrimeProbability,std::string Duration);
+
 		std::string GetJSON();
 		int Mersenne;
 		std::string MersenneResult;
 		int PrimeProbability;
 		std::string PrimeProbabilityText;
+		std::string Duration;
 	};
-}
+//}
 
