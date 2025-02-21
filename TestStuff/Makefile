@@ -1,4 +1,4 @@
-SRCS = $(wildcard Ex*.cpp)
+SRCS = $(wildcard *.cpp)
 LIBS = -lpqxx -lpq
  
 CXXFLAGS = -std=c++20 -Wno-deprecated-copy
