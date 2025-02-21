@@ -120,7 +120,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>DEBUG;_SILENCE_CXX23_DENORM_DEPRECATION_WARNING</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +150,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MersennePrime.cpp" />
     <ClCompile Include="MersennePrimes.cpp" />
-    <ClCompile Include="MyStringstream.cpp" />
     <ClCompile Include="PGMersenne.cpp" />
     <ClCompile Include="PrimeStatus.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -158,7 +157,6 @@
   <ItemGroup>
     <ClInclude Include="MersennePrime.h" />
     <ClInclude Include="MersennePrimes.h" />
-    <ClInclude Include="MyStringstream.h" />
     <ClInclude Include="PGMersenne.h" />
     <ClInclude Include="PrimeStatus.h" />
     <ClInclude Include="Utils.h" />

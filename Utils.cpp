@@ -40,4 +40,3 @@ std::string Utils::Pluralise(std::string Word, int Number)
 {
     return Number == 0 || Number > 1 ? Word.append("s") : Word;
 }
-
