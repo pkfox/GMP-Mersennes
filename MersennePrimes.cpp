@@ -109,7 +109,7 @@ void MersennePrimes::CalculateDuration()
 	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
 	this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
 
-	ss << hms.hours().count() << "hour " << hms.minutes().count() << "minute " << hms.seconds().count() << "second";
+	ss << hms.hours().count() << "H" << hms.minutes().count() << "M" << hms.seconds().count() << "S";
 	this->Duration = ss.str();
 
 	ss.str("");

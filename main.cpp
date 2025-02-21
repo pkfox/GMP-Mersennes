@@ -14,7 +14,7 @@
 
 int main(int argc, char* argv[])
 {
-	std::cout << "libpqxx version: " << PQXX_VERSION << std::endl;
+	std::cout << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx" << "\n";
 
 	std::regex confirm_regex("Y", std::regex_constants::icase);
 	std::regex primality_regex("-C", std::regex_constants::icase);
