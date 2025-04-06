@@ -34,14 +34,20 @@ int main(int argc, char* argv[])
 
 	pgm.GetData(Primes);
 	MersennePrimes mp;
-
 	mp.SetPrimalityCheck(CheckPrimality);
 	
-	for (size_t i = 0; i < Primes.size(); i++)
+	try
 	{
-		mp.SetStartRange(Primes[i] - 1);
-		mp.SetEndRange(Primes[i]);
-		mp.GenerateListOfMersennes();
+		for (size_t i = 0; i < Primes.size(); i++)
+		{
+			mp.SetStartRange(82589933);
+			mp.SetEndRange(Primes[i]);
+			mp.GenerateListOfMersennes();
+		}
+	}
+	catch (std::exception& e)
+	{
+		Utils::PrintMessage(e.what());
 	}
 	return 0;
 }
