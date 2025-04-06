@@ -14,16 +14,16 @@
 	{
 	public:
 		PGMersenne();
-		PGMersenne(int Mersenne, std::string MersenneResult, int Probability,std::string Duration);
+		PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::string Duration);
 		[[nodiscard]]
 		std::size_t EditMersenne();
 		void GetData(std::vector<int>& Primes);
 	private:
 		int Mersenne;
+		std::string Duration;
 		std::string MersenneResult;
 		int Probability;
 		std::string PrimeProbabilityText;
-		std::string Duration;
 		std::string ConnectionString = "host=beelink port=5432 dbname=commands user=postgres password=Giraffes09";
 		pqxx::connection PGConnection = pqxx::connection(this->ConnectionString);
 		pqxx::work PGTransaction = pqxx::work(PGConnection);

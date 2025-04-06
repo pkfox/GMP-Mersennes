@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <chrono>
+
 #include "PrimeStatus.h"
 #include "PGMersenne.h"
 #include "Utils.h"
@@ -39,7 +41,7 @@ private:
 	mpz_t Pow2Value; // Initial pow2 value. 
 	mpz_t Pow2MinusOneValue;// Initial pow2 value -1. 
 	mpz_t CurrentPrime; // The current prime in the loop.
-	const unsigned int Probability = 50; // Used by GMP in primality check.
+	const unsigned int Probability = 15; // Used by GMP in primality check.
 	unsigned long int StartRange; // Generate mersennes starting at this number.
 	unsigned long int EndRange; // and end at this.
 	unsigned long int LoopIndex;
@@ -57,7 +59,6 @@ private:
 	// Used in elapsed time calculation.
 	std::chrono::steady_clock::time_point StartOfCalculation;
 	std::chrono::steady_clock::time_point EndOfCalculation;
-	std::chrono::hh_mm_ss<std::chrono::seconds> Elapsedtime;
 	std::string Duration;
 	void CalculateDuration();
 };

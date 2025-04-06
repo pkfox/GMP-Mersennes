@@ -20,15 +20,17 @@ MersennePrimes::MersennePrimes(int StartRange, int EndRange, bool CheckPrimality
 // Populates a vector of integers containing mersenne primes.
 void MersennePrimes::GenerateListOfMersennes()
 {
+	// Set this->CurrentPrime to this->StartRange
 	mpz_init_set_ui(this->CurrentPrime, this->StartRange);
 	this->GetNextPrime();
 	this->AnnounceRunDetails();
+	this->isMersennePrime = false;
 
 	std::stringstream ss;
 	ss << "Starting with prime " << this->LoopIndex;
 	Utils::PrintMessage(ss.str());
-
-	while (this->LoopIndex <= this->EndRange)
+	
+	while(this->LoopIndex <= this->EndRange)
 	{
 		this->StartOfCalculation = std::chrono::steady_clock::now();
 		// Raise 2 ^ this->LoopIndex and put the result in this->Pow2Value
@@ -48,7 +50,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->MPrimes.push_back(this->LoopIndex);
 			this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
 			std::stringstream ss;
-			ss << "((2^" << this->LoopIndex << ")-1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
+			ss << "((2^" << this->LoopIndex << ") - 1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 			Utils::PrintMessage(ss.str());
 			ss.clear();
 			ss.str("");
@@ -62,6 +64,14 @@ void MersennePrimes::GenerateListOfMersennes()
 		}
 		this->GetNextPrime();
 	}
+}
+
+void MersennePrimes::GetNextPrime()
+{
+	// Get next prime.
+	mpz_nextprime(this->CurrentPrime, this->CurrentPrime);
+	// Set this->LoopIndex to the next prime.
+	this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
 }
 
 // Returns a vector of ints containing the primes.
@@ -93,29 +103,15 @@ void MersennePrimes::AnnounceRunDetails()
 	Utils::PrintMessage(ss.str());
 }
 
-void MersennePrimes::GetNextPrime()
-{
-	// Get next prime.
-	mpz_nextprime(this->CurrentPrime, this->CurrentPrime);
-	// Set this->LoopIndex to the next prime.
-	this->LoopIndex = static_cast<unsigned long int>(mpz_get_ui(this->CurrentPrime));
-}
-
 void MersennePrimes::CalculateDuration()
 {
-	std::chrono::hh_mm_ss hms(this->EndOfCalculation - this->StartOfCalculation);
-
 	std::stringstream ss;
-	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-	this->Elapsedtime = std::chrono::hh_mm_ss(Seconds);
-
-	ss << hms.hours().count() << "H" << hms.minutes().count() << "M" << hms.seconds().count() << "S";
-	this->Duration = ss.str();
-
 	ss.str("");
-
+	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
+	ss << std::chrono::hh_mm_ss(Seconds).to_duration();
+	this->Duration = ss.str();
+	ss.str("");
 	ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
-
 	Utils::PrintMessage(ss.str());
 }
 

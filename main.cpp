@@ -14,7 +14,9 @@
 
 int main(int argc, char* argv[])
 {
-	std::cout << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx" << "\n";
+	std::stringstream ss;
+	ss << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx";
+	Utils::PrintMessage(ss.str());
 
 	std::regex confirm_regex("Y", std::regex_constants::icase);
 	std::regex primality_regex("-C", std::regex_constants::icase);
@@ -23,7 +25,7 @@ int main(int argc, char* argv[])
 	PGMersenne pgm;
 	std::string Confirm;
 	bool CheckPrimality = std::regex_search(argc > 1 ? argv[1] : "", primality_regex);
-	std::stringstream ss;
+	
 	ss << "Mersenne search will " << (CheckPrimality ? "apply" : "skip") << " the primality test\n";
 	ss << "Do you want to continue Y/N ? ";
 	Utils::PrintMessage(ss.str());
@@ -34,13 +36,14 @@ int main(int argc, char* argv[])
 
 	pgm.GetData(Primes);
 	MersennePrimes mp;
+
 	mp.SetPrimalityCheck(CheckPrimality);
 	
 	try
 	{
 		for (size_t i = 0; i < Primes.size(); i++)
 		{
-			mp.SetStartRange(82589933);
+			mp.SetStartRange(Primes[i] - 1);
 			mp.SetEndRange(Primes[i]);
 			mp.GenerateListOfMersennes();
 		}
