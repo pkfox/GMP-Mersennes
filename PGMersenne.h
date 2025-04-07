@@ -9,7 +9,7 @@
 #include "PrimeStatus.h"
 #include "Utils.h"
 #include "MersennePrime.h"
-
+//#include "Duration.hpp"
 
 	class PGMersenne
 	{

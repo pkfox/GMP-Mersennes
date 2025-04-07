@@ -8,6 +8,11 @@
 
 namespace pqxx
 {
+    template<> struct nullness<std::chrono::hh_mm_ss<std::chrono::seconds>> 
+    {
+
+    };
+
     template<>
     struct string_traits<std::chrono::hh_mm_ss<std::chrono::seconds>>
     {
@@ -19,6 +24,11 @@ namespace pqxx
         }
 
         static constexpr bool has_null() noexcept
+        {
+            return false;
+        }
+        
+        static constexpr bool is_null() noexcept
         {
             return false;
         }

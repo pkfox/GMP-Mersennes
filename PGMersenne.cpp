@@ -1,6 +1,5 @@
-#include <iostream>
 #include "PGMersenne.h"
-#include "Duration.hpp"
+
 
 
 PGMersenne::PGMersenne() :PrimeProbabilityText(""), MersenneResult(""), Mersenne(0), Probability(0)
@@ -31,7 +30,7 @@ size_t PGMersenne::EditMersenne()
 		this->Params.append(this->Mersenne);
 		this->Params.append(this->MersenneResult);
 		this->Params.append(this->PrimeProbabilityText);
-		this->Params.append(this->Duration);
+		this->Params.append(this->Duration.to_duration());
 
 		this->PGResult = this->PGTransaction.exec("select editmersenne($1, $2, $3, $4)",this->Params);
 		

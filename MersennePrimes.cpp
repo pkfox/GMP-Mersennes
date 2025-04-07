@@ -1,7 +1,7 @@
 #include "MersennePrimes.h"
 
 
-MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0)
+MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0),CurrentPrime(0),LoopIndex(0)
 {
 	mpz_init_set_ui(this->One, 1);
 	mpz_init_set_ui(this->Pow2Value, 0);
