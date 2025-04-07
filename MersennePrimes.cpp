@@ -112,8 +112,21 @@ void MersennePrimes::CalculateDuration()
 	std::stringstream ss;
 	ss.str("");
 	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-	this->Duration = std::chrono::hh_mm_ss(Seconds);
+	std::chrono::hh_mm_ss t = std::chrono::hh_mm_ss(Seconds);
+	bool gotone = t.is_negative() == false;
+
+	std::ostringstream oss;
+	int width = 2;
+
+	oss << std::setfill('0')
+		<< std::setw(width) << t.hours().count() << ":"
+		<< std::setw(width) << t.minutes().count() << ":"
+		<< std::setw(width) << t.seconds().count();
+	
+	this->Duration = oss.str();
+	oss.str("");
 	ss.str("");
+
 	ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
 	Utils::PrintMessage(ss.str());
 }

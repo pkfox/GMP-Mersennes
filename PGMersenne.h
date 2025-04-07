@@ -15,13 +15,13 @@
 	{
 	public:
 		PGMersenne();
-		PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::chrono::hh_mm_ss<std::chrono::seconds> Duration);
+		PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::string Duration);
 		[[nodiscard]]
 		std::size_t EditMersenne();
 		void GetData(std::vector<int>& Primes);
 	private:
 		int Mersenne;
-		std::chrono::hh_mm_ss<std::chrono::seconds> Duration;
+		std::string Duration;
 		std::string MersenneResult;
 		int Probability;
 		std::string PrimeProbabilityText;
