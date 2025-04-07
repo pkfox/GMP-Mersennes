@@ -1,12 +1,13 @@
 #include <iostream>
 #include "PGMersenne.h"
+#include "Duration.hpp"
 
 
 PGMersenne::PGMersenne() :PrimeProbabilityText(""), MersenneResult(""), Mersenne(0), Probability(0)
 {
 }
 
-PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::string Duration) :PGMersenne()
+PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::chrono::hh_mm_ss<std::chrono::seconds> Duration) :PGMersenne()
 {
 	this->Mersenne = Mersenne;
 	this->MersenneResult = MersenneResult;

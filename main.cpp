@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
 	std::stringstream ss;
 	ss << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx";
 	Utils::PrintMessage(ss.str());
+	ss.str("");
 
 	std::regex confirm_regex("Y", std::regex_constants::icase);
 	std::regex primality_regex("-C", std::regex_constants::icase);
@@ -52,13 +53,10 @@ int main(int argc, char* argv[])
 	{
 		Utils::PrintMessage(e.what());
 	}
+
+	ss.str("");
+	ss << "Mersenne search completed.";
+	Utils::PrintMessage(ss.str());	
+
 	return 0;
 }
-
-
-
-
-
-
-
-

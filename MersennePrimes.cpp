@@ -38,6 +38,10 @@ void MersennePrimes::GenerateListOfMersennes()
 		// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
 		// and test for primality probability.
+		ss.str("");	
+		ss << "Calculation finished we now have to check for primality - this can take a very long time";
+		Utils::PrintMessage(ss.str());	
+		ss.str("");
 		this->PrimeProbability = this->CheckPrimality ? mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) : 2;
 		this->isMersennePrime = this->PrimeProbability > 0;
 		// The possible return values from mpz_probab_prime_p are
@@ -50,7 +54,7 @@ void MersennePrimes::GenerateListOfMersennes()
 			this->MPrimes.push_back(this->LoopIndex);
 			this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
 			std::stringstream ss;
-			ss << "((2^" << this->LoopIndex << ") - 1) is " << this->PowerValue << " has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
+			ss << "((2^" << this->LoopIndex << ") - 1) is " << this->PowerValue << " and has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 			Utils::PrintMessage(ss.str());
 			ss.clear();
 			ss.str("");
@@ -108,10 +112,8 @@ void MersennePrimes::CalculateDuration()
 	std::stringstream ss;
 	ss.str("");
 	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-	ss << std::chrono::hh_mm_ss(Seconds).to_duration();
-	this->Duration = ss.str();
+	this->Duration = std::chrono::hh_mm_ss(Seconds);
 	ss.str("");
 	ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
 	Utils::PrintMessage(ss.str());
 }
-
