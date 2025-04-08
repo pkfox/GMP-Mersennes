@@ -57,6 +57,8 @@ int main(int argc, char* argv[])
 	ss.str("");
 	ss << "Mersenne search completed.";
 	Utils::PrintMessage(ss.str());	
+	std::string s;
+	std::getline(std::cin, s);
 
 	return 0;
 }
