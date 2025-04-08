@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Duration.hpp" />
+    <ClInclude Include="Duration.bak" />
     <ClInclude Include="MersennePrime.h" />
     <ClInclude Include="MersennePrimes.h" />
     <ClInclude Include="PGMersenne.h" />

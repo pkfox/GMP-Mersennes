@@ -9,19 +9,19 @@
 #include "PrimeStatus.h"
 #include "Utils.h"
 #include "MersennePrime.h"
-//#include "Duration.hpp"
+#include "Duration.hpp"
 
 	class PGMersenne
 	{
 	public:
 		PGMersenne();
-		PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::string Duration);
+		PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::chrono::hh_mm_ss<std::chrono::seconds> Duration);
 		[[nodiscard]]
 		std::size_t EditMersenne();
 		void GetData(std::vector<int>& Primes);
 	private:
 		int Mersenne;
-		std::string Duration;
+		std::chrono::hh_mm_ss<std::chrono::seconds> Duration;
 		std::string MersenneResult;
 		int Probability;
 		std::string PrimeProbabilityText;

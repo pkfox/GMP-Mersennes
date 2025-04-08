@@ -6,7 +6,7 @@ PGMersenne::PGMersenne() :PrimeProbabilityText(""), MersenneResult(""), Mersenne
 {
 }
 
-PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::string Duration) :PGMersenne()
+PGMersenne::PGMersenne(int Mersenne, std::string MersenneResult, int Probability, std::chrono::hh_mm_ss<std::chrono::seconds> Duration) :PGMersenne()
 {
 	this->Mersenne = Mersenne;
 	this->MersenneResult = MersenneResult;
@@ -31,10 +31,10 @@ size_t PGMersenne::EditMersenne()
 		this->Params.append(this->MersenneResult);
 		this->Params.append(this->PrimeProbabilityText);
 		this->Params.append(this->Duration);
-
-		this->PGResult = this->PGTransaction.exec("select editmersenne($1, $2, $3, $4)",this->Params);
 		
+		this->PGResult = this->PGTransaction.exec("select editmersenne($1, $2, $3, $4)",this->Params);
 		this->PGTransaction.commit();
+		
 		RetVal = this->PGResult[0][0].as<size_t>();
 
 		return RetVal;

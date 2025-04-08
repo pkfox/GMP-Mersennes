@@ -53,8 +53,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		{
 			this->MPrimes.push_back(this->LoopIndex);
 			this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-			std::stringstream ss;
-			ss << "((2^" << this->LoopIndex << ") - 1) is " << this->PowerValue << " and has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
+			ss << "((2^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
 			Utils::PrintMessage(ss.str());
 			ss.clear();
 			ss.str("");
@@ -110,23 +109,9 @@ void MersennePrimes::AnnounceRunDetails()
 void MersennePrimes::CalculateDuration()
 {
 	std::stringstream ss;
-	ss.str("");
 	std::chrono::seconds Seconds = std::chrono::duration_cast<std::chrono::seconds>(this->EndOfCalculation - this->StartOfCalculation);
-	std::chrono::hh_mm_ss t = std::chrono::hh_mm_ss(Seconds);
-	bool gotone = t.is_negative() == false;
-
-	std::ostringstream oss;
-	int width = 2;
-
-	oss << std::setfill('0')
-		<< std::setw(width) << t.hours().count() << ":"
-		<< std::setw(width) << t.minutes().count() << ":"
-		<< std::setw(width) << t.seconds().count();
+	this->Duration = std::chrono::hh_mm_ss(Seconds);
 	
-	this->Duration = oss.str();
-	oss.str("");
-	ss.str("");
-
 	ss << "Primality Calculation for " << this->CurrentPrime << " took " << this->Duration;
 	Utils::PrintMessage(ss.str());
 }
