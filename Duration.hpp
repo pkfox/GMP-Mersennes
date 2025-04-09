@@ -59,16 +59,19 @@ namespace pqxx
 
         static char* into_buf(char* begin, char* end, time_type const& value)
         {
-            auto const space = std::size_t(end - begin);
-            auto const budget = size_buffer(value);
+            std::size_t const space = std::size_t(end - begin);
+            std::size_t const budget = size_buffer(value);
+       
             if (space < budget)
                 throw conversion_overrun{ "Not enough buffer space." };
 
-            auto text = std::format("{}", value);
-            if (std::size(text) >= budget)
-                throw conversion_overrun{
-                  std::format("Time does not fit into buffer: {}", text) };
-            auto len = text.copy(begin, std::string::npos);
+			std::stringstream ss;
+			ss << value.hours().count() << "h" << value.minutes().count() << "m" << value.seconds().count() << "s";
+			std::string text(ss.str());
+            
+            // This chokes on Linux
+            // std::string text = std::format("{}", value);
+            std::size_t len = text.copy(begin, std::string::npos);
             begin[len] = '\0';
             return &begin[len + 1];
         }
