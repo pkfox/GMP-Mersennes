@@ -32,7 +32,7 @@ size_t PGMersenne::EditMersenne()
 		this->Params.append(this->PrimeProbabilityText);
 		this->Params.append(this->Duration);
 		
-		this->PGResult = this->PGTransaction.exec("select editmersenne($1, $2, $3, $4)",this->Params);
+		this->PGResult = this->PGTransaction.exec("select editmersenne($1, $2, $3, $4::interval)",this->Params);
 		this->PGTransaction.commit();
 		
 		RetVal = this->PGResult[0][0].as<size_t>();
