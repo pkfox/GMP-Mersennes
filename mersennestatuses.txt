@@ -1,3 +1,4 @@
-Definitely not a Mersenne prime
-Possibly a Mersenne prime
-Definitely a Mersenne prime
+Definitemersenne
+Possiblemersenne
+Definitelynotmersenne
+

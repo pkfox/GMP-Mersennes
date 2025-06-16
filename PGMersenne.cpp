@@ -41,6 +41,7 @@ size_t PGMersenne::EditMersenne()
 	}
 	catch (std::exception const& ex)
 	{
+		std::cout << "Duration errored and is " << this->Duration << "\n";
 		std::cout << ex.what();
 	}
 	return 0;

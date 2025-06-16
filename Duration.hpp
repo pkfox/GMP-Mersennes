@@ -69,10 +69,13 @@ namespace pqxx
 			ss << value.hours().count() << "h" << value.minutes().count() << "m" << value.seconds().count() << "s";
 			std::string text(ss.str());
             
-            // This chokes on Linux
-            // std::string text = std::format("{}", value);
+            
+           // std::string text = std::format("{}", value);
             std::size_t len = text.copy(begin, std::string::npos);
             begin[len] = '\0';
+            
+            std::cout << "In into_buf in Duration.hpp returning &begin[len + 1] which has a value of " << &begin[len + 1] << "\n";
+          //  return text.data();
             return &begin[len + 1];
         }
     };
