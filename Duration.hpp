@@ -7,7 +7,7 @@ namespace pqxx
     template<>
     std::string const type_name<std::chrono::hh_mm_ss<std::chrono::seconds>>
     {
-        "Eat shit"
+        "Duration"
     };
 
     template<> struct nullness<std::chrono::hh_mm_ss<std::chrono::seconds>> :
@@ -61,22 +61,17 @@ namespace pqxx
         {
             std::size_t const space = std::size_t(end - begin);
             std::size_t const budget = size_buffer(value);
-       
+
             if (space < budget)
                 throw conversion_overrun{ "Not enough buffer space." };
 
-			std::stringstream ss;
-			ss << value.hours().count() << "h" << value.minutes().count() << "m" << value.seconds().count() << "s";
-			std::string text(ss.str());
-            
-            
-           // std::string text = std::format("{}", value);
+	    std::string text = std::format("{}",value);
+
             std::size_t len = text.copy(begin, std::string::npos);
             begin[len] = '\0';
-            
+
             std::cout << "In into_buf in Duration.hpp returning &begin[len + 1] which has a value of " << &begin[len + 1] << "\n";
-          //  return text.data();
             return &begin[len + 1];
         }
     };
-} 
+}
