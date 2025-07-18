@@ -5,7 +5,7 @@
 namespace pqxx
 {
     template<>
-    std::string const type_name<std::chrono::hh_mm_ss<std::chrono::seconds>>
+    std::string_view const type_name<std::chrono::hh_mm_ss<std::chrono::seconds>>
     {
         "Duration"
     };
