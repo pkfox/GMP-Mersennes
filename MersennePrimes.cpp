@@ -128,6 +128,6 @@ std::string MersennePrimes::BuildMersenneMessage() const
     std::ostringstream ss;
     ss << "((" << 2 << "^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length() << " digit"
        << (this->PowerValue.length() > 1 ? "s" : "")
-       << " and " << PrimeStatus::GetStatusMessage(PrimeProbability);
+       << " and is " << PrimeStatus::GetStatusMessage(PrimeProbability);
     return ss.str();
 }
