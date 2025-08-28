@@ -22,13 +22,23 @@
 
 	void PrimeStatus::InitMap()
 	{
-		std::ifstream file("mersennestatuses.txt");
+		std::ifstream statusfile("mersennestatuses.txt");
+		std::ifstream messagefile("mersennemessages.txt");
 		int i = 0;
 		std::string line;
-		for (; getline(file, line); i++)
+		
+		for (; getline(statusfile, line); i++)
 		{
 			PrimeStatuses[i] = line;
-			PrimeStatusMessages[i] = " is " + line;
 		}
-		file.close();
+		statusfile.close();
+		
+		i = 0;
+		line = "";
+		
+		for (; getline(messagefile, line); i++)
+		{
+			PrimeStatusMessages[i] = line;
+		}
+		messagefile.close();
 	}

@@ -1,5 +1,9 @@
 #include "MersennePrimes.h"
 
+std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp) {
+    os << (mp.CheckPrimality ? "Executing" : "Skipping") << " primality check";
+    return os;
+}
 
 MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0),LoopIndex(0)
 {
@@ -29,7 +33,7 @@ void MersennePrimes::GenerateListOfMersennes()
 	std::stringstream ss;
 	ss << "Starting with prime " << this->LoopIndex;
 	Utils::PrintMessage(ss.str());
-	
+
 	while(this->LoopIndex <= this->EndRange)
 	{
 		this->StartOfCalculation = std::chrono::steady_clock::now();
@@ -38,9 +42,9 @@ void MersennePrimes::GenerateListOfMersennes()
 		// Subtract 1 from the result and put it in this->Pow2MinusOneValue.
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
 		// and test for primality probability.
-		ss.str("");	
-		ss << "Calculation finished we now have to check for primality - this can take a very long time";
-		Utils::PrintMessage(ss.str());	
+		ss.str("");
+		ss << *this;
+		Utils::PrintMessage(ss.str());
 		ss.str("");
 		this->PrimeProbability = this->CheckPrimality ? mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) : 2;
 		this->isMersennePrime = this->PrimeProbability > 0;
@@ -53,7 +57,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		{
 			this->MPrimes.push_back(this->LoopIndex);
 			this->PowerValue = mpz_get_str(NULL, 10, this->Pow2MinusOneValue);
-			ss << "((2^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length() << " digit" << (this->PowerValue.length() > 1 ? "s" : "") << " and" << PrimeStatus::GetStatusMessage(PrimeProbability);
+			ss << this->BuildMersenneMessage();
 			Utils::PrintMessage(ss.str());
 			ss.clear();
 			ss.str("");
@@ -117,4 +121,13 @@ void MersennePrimes::CalculateDuration()
 	ss << "Primality Calculation for " << this->CurrentPrime << " took " << DurationString;
 
 	Utils::PrintMessage(ss.str());
+}
+
+std::string MersennePrimes::BuildMersenneMessage() const 
+{
+    std::ostringstream ss;
+    ss << "((" << 2 << "^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length() << " digit"
+       << (this->PowerValue.length() > 1 ? "s" : "")
+       << " and " << PrimeStatus::GetStatusMessage(PrimeProbability);
+    return ss.str();
 }

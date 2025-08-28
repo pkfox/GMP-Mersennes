@@ -26,7 +26,9 @@ Some people have too much time on their hands.
 class MersennePrimes
 {
 public:
-	MersennePrimes();
+    // This is to help me to learn operator overloading and friend functions
+    friend std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp);
+    MersennePrimes();
 	MersennePrimes(int StartRange, int EndRange, bool CheckPrimality = true);
 	void GenerateListOfMersennes();
 	[[nodiscard]]
@@ -34,7 +36,7 @@ public:
 	void SetStartRange(unsigned long int StartRange);
 	void SetEndRange(unsigned long int EndRange);
 	void SetPrimalityCheck(bool CheckPrimality);
-
+    	
 private:
 	mpz_t One; // Used for subtraction from pow 2.
 	const unsigned int Two = 2; // Used for exponential calculation.
@@ -55,11 +57,12 @@ private:
 	std::string PowerValue; // The ((2^P) -1) value of a possible mersenne.
 	// Optional primality check
 	bool CheckPrimality;
-
 	// Used in elapsed time calculation.
 	std::chrono::steady_clock::time_point StartOfCalculation;
 	std::chrono::steady_clock::time_point EndOfCalculation;
 	std::chrono::hh_mm_ss<std::chrono::seconds> Duration;
 	void CalculateDuration();
+	// In your class declaration
+	std::string BuildMersenneMessage() const;
 };
 #endif
