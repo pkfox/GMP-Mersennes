@@ -4,6 +4,7 @@
 //    os << (mp.CheckPrimality ? "Executing" : "Skipping") << " primality check";
 //    return os;
 //}
+// 
 
 MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0),LoopIndex(0)
 {
@@ -11,6 +12,7 @@ MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(
 	mpz_init_set_ui(this->Pow2Value, 0);
 	mpz_init_set_ui(this->Pow2MinusOneValue, 0);
 }
+
 
 // ctor accepting a start and end range
 // and a boolean indicating whether to apply a primality check.
@@ -123,11 +125,50 @@ void MersennePrimes::CalculateDuration()
 	Utils::PrintMessage(ss.str());
 }
 
-std::string MersennePrimes::BuildMersenneMessage() const 
+// Helper function
+static std::string toSuperscript(const std::string& input) {
+	std::map<char, std::string> super = {
+		{'0', "\u2070"}, {'1', "\u00B9"}, {'2', "\u00B2"}, {'3', "\u00B3"},
+		{'4', "\u2074"}, {'5', "\u2075"}, {'6', "\u2076"}, {'7', "\u2077"},
+		{'8', "\u2078"}, {'9', "\u2079"}
+	};
+
+	std::string result;
+	size_t i = 0;
+	while (i < input.size()) {
+		if (input[i] == '^' && i + 1 < input.size()) {
+			i++;
+			while (i < input.size() && isdigit(input[i])) {
+				result += super[input[i]];
+				i++;
+			}
+		}
+		else {
+			result += input[i];
+			i++;
+		}
+	}
+	return result;
+}
+
+std::string MersennePrimes::BuildMersenneMessage() const
 {
-    std::ostringstream ss;
-    ss << "((" << 2 << "^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length() << " digit"
-       << (this->PowerValue.length() > 1 ? "s" : "")
-       << " and is " << PrimeStatus::GetStatusMessage(PrimeProbability);
-    return ss.str();
+	std::ostringstream ss;
+
+#ifndef _WIN32
+	std::ostringstream exp;
+	exp << 2 << "^" << this->LoopIndex;
+
+	std::string expStr = toSuperscript(exp.str());
+
+	ss << "((" << expStr << ") - 1) has " << this->PowerValue.length() << " digit"
+		<< (this->PowerValue.length() > 1 ? "s" : "")
+		<< " and is " << PrimeStatus::GetStatusMessage(PrimeProbability);
+#else
+	ss << "((2^" << this->LoopIndex << ") - 1) has " << this->PowerValue.length();
+	ss << " digit" << (this->PowerValue.length() > 1 ? "s" : "");
+	ss	<< " and is " << PrimeStatus::GetStatusMessage(PrimeProbability);
+#endif
+
+	return ss.str();
 }

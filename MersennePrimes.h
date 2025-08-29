@@ -9,6 +9,10 @@
 #include <map>
 #include <chrono>
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 #include "PrimeStatus.h"
 #include "PGMersenne.h"
 #include "Utils.h"

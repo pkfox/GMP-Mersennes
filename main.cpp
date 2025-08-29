@@ -14,6 +14,7 @@
 
 int main(int argc, char* argv[])
 {
+	SetConsoleOutputCP(CP_UTF8);
 	std::stringstream ss;
 	ss << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx";
 	Utils::PrintMessage(ss.str());
