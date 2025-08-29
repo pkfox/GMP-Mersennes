@@ -163,10 +163,8 @@
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="mersennestatuses.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Makefile" />
+    <None Include="mersennestatuses.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

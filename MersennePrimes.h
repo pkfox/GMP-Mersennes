@@ -27,7 +27,7 @@ class MersennePrimes
 {
 public:
     // This is to help me to learn operator overloading and friend functions
-    friend std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp);
+    //friend std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp);
     MersennePrimes();
 	MersennePrimes(int StartRange, int EndRange, bool CheckPrimality = true);
 	void GenerateListOfMersennes();

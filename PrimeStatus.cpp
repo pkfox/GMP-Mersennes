@@ -1,44 +1,46 @@
 #include "PrimeStatus.h"
 
-	std::string PrimeStatus::GetStatus(int PrimeProbability)
-	{
-		std::string RetVal;
+bool PrimeStatus::Mapinitialized = []() 
+{
+    InitMap();  // Automatically load data at program start
+    return true;
+}();
 
-		if (PrimeStatuses.size() == 0)
-			InitMap();
 
-		return PrimeStatuses.count(PrimeProbability) > 0 ? PrimeStatuses[PrimeProbability] : RetVal;
-	}
+void PrimeStatus::InitMap()
+{
+    std::ifstream file("mersennestatuses.json");
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    file.close();
 
-	std::string PrimeStatus::GetStatusMessage(int PrimeProbability)
-	{
-		std::string RetVal;
+    rapidjson::Document doc;
+    doc.Parse(buffer.str().c_str());
 
-		if (PrimeStatusMessages.size() == 0)
-			InitMap();
+    if (!doc.HasMember("Mersennestatuses") || !doc["Mersennestatuses"].IsArray())
+        return;
 
-		return PrimeStatusMessages.count(PrimeProbability) > 0 ? PrimeStatusMessages[PrimeProbability] : RetVal;
-	}
+    const rapidjson::Value& statuses = doc["Mersennestatuses"];
 
-	void PrimeStatus::InitMap()
-	{
-		std::ifstream statusfile("mersennestatuses.txt");
-		std::ifstream messagefile("mersennemessages.txt");
-		int i = 0;
-		std::string line;
-		
-		for (; getline(statusfile, line); i++)
-		{
-			PrimeStatuses[i] = line;
-		}
-		statusfile.close();
-		
-		i = 0;
-		line = "";
-		
-		for (; getline(messagefile, line); i++)
-		{
-			PrimeStatusMessages[i] = line;
-		}
-		messagefile.close();
-	}
+    for (rapidjson::SizeType i = 0; i < statuses.Size(); i++)
+    {
+        const rapidjson::Value& item = statuses[i];
+        int id = item["id"].GetInt();
+
+        PrimeInfo info;
+        info.status = item["status"].GetString();
+        info.message = item["message"].GetString();
+
+        PrimeStatusMap[id] = info;
+    }
+}
+
+std::string PrimeStatus::GetStatus(int PrimeProbability)
+{
+    return PrimeStatusMap[PrimeProbability].status;
+}
+
+std::string PrimeStatus::GetStatusMessage(int PrimeProbability)
+{
+    return PrimeStatusMap[PrimeProbability].message;
+}

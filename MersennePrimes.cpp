@@ -1,9 +1,9 @@
 #include "MersennePrimes.h"
 
-std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp) {
-    os << (mp.CheckPrimality ? "Executing" : "Skipping") << " primality check";
-    return os;
-}
+//std::ostream& operator<<(std::ostream& os, const MersennePrimes& mp) {
+//    os << (mp.CheckPrimality ? "Executing" : "Skipping") << " primality check";
+//    return os;
+//}
 
 MersennePrimes::MersennePrimes() :CheckPrimality(true), StartRange(0), EndRange(0),LoopIndex(0)
 {
@@ -43,7 +43,7 @@ void MersennePrimes::GenerateListOfMersennes()
 		mpz_sub(this->Pow2MinusOneValue, this->Pow2Value, this->One);
 		// and test for primality probability.
 		ss.str("");
-		ss << *this;
+		ss << (CheckPrimality ? "Executing" : "Skipping") << " primality check";
 		Utils::PrintMessage(ss.str());
 		ss.str("");
 		this->PrimeProbability = this->CheckPrimality ? mpz_probab_prime_p(this->Pow2MinusOneValue, this->Probability) : 2;
