@@ -8,13 +8,14 @@
 #include <algorithm>
 #include "Utils.h"
 #include <regex>
-
+#include "UI.h"
 #include <pqxx/pqxx>
 #include <exception>
 
 int main(int argc, char* argv[])
 {
-	SetConsoleOutputCP(CP_UTF8);
+	//UI::Init();
+	
 	std::stringstream ss;
 	ss << "GMP Mersenne using " << PQXX_VERSION << " of libpqxx";
 	Utils::PrintMessage(ss.str());
@@ -58,8 +59,9 @@ int main(int argc, char* argv[])
 	ss.str("");
 	ss << "Mersenne search completed.";
 	Utils::PrintMessage(ss.str());	
+	
 	std::string s;
 	std::getline(std::cin, s);
-
+    //UI::Cleanup();
 	return 0;
 }
